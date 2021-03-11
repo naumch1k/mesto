@@ -9,9 +9,8 @@
 @import url('../blocks/profile/__info/profile__info.css');
 @import url('../blocks/profile/__name/profile__name.css');
 @import url('../blocks/profile/__bio/profile__bio.css');
-@import url('../blocks/profile/__edit-button/profile__edit-button.css');
-@import url('../blocks/profile/__add-button/profile__add-button.css');
-@import url('../blocks/profile/__edit-icon/profile__edit-icon.css');
+@import url('../blocks/profile/__edit-btn/profile__edit-btn.css');
+@import url('../blocks/profile/__add-btn/profile__add-btn.css');
 @import url('../blocks/elements/elements.css');
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');

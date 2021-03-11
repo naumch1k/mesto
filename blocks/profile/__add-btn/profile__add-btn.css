@@ -1,5 +1,6 @@
-.profile__add-button {
+.profile__add-btn {
   margin-left: auto;
+  padding: 0;
   width: 150px;
   height: 50px;
   background-color: transparent;
@@ -11,7 +12,7 @@
   transition: border .5s ease;
 }
 
-.profile__add-button::before {
+.profile__add-btn::before {
   content: "";
   width: 2px;
   height: 22px;
@@ -22,7 +23,7 @@
   transition: background-color .5s ease;
 }
 
-.profile__add-button::after {
+.profile__add-btn::after {
   content: "";
   width: 22px;
   height: 2px;
@@ -33,11 +34,39 @@
   transition: background-color .5s ease;
 }
 
-.profile__add-button:hover {
+.profile__add-btn:hover {
   border: 2px solid rgba(255, 255, 255, .6);
 }
 
-.profile__add-button:hover::before,
-.profile__add-button:hover::after {
+.profile__add-btn:hover::before,
+.profile__add-btn:hover::after {
   background-color: rgba(255, 255, 255, .6);
+}
+
+@media screen and (max-width: 1023px) {
+  .profile__add-btn {
+    width: 282px;
+    margin: 0;
+  }
+  .profile__add-btn::before {
+    top: 12px;
+    left: 139px;
+  }
+  .profile__add-btn::after {
+    top: 22px;
+    left: 129px;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .profile__add-btn::before {
+    height: 16px;
+    top: 15px;
+    left: 139px;
+  }
+  .profile__add-btn::after {
+    width: 16px;
+    top: 22px;
+    left: 132px;
+  }
 }

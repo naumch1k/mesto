@@ -17,3 +17,4 @@
 * лайки. 
 
 ## Ссылка на GitHub Pages
+[https://naumch1k.github.io/mesto/index.html](https://naumch1k.github.io/mesto/index.html)

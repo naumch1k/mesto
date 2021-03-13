@@ -5,7 +5,7 @@
   border: 1px solid rgb(255, 255, 255);
   outline: none;
   background: url(../../../images/edit-icon.svg) no-repeat 50%;
-  position: absolute;
+  position: absolute;/*показалось логичным, что кнопка относится не к имени, а ко всей инфо пользователя; поэтому моя кнопка позиционируется отн contact__info*/
   top: 15px;
   right: -43px;
   cursor: pointer;

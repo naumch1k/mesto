@@ -5,7 +5,7 @@
   font-weight: 900;
 }
 
-@media screen and (max-width: 416px) {
+@media screen and (max-width: 618px) {
   .form__heading {
     font-size: 23px;
   }

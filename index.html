@@ -13,12 +13,12 @@
     <div class="popup">
       <div class="popup__overlay">
         <div class="popup__container">
-          <button class="popup__close-btn" type="button"></button>
+          <button class="popup__close-btn"></button>
           <form class="form">
             <h2 class="form__heading">Редактировать профиль</h2>
             <fieldset class="form__contact-info">
-              <input class="form__item form__item_el_name" type="text" placeholder="Имя" required>
-              <input class="form__item form__item_el_bio" type="text" placeholder="О себе" required>
+              <input class="form__item form__item_el_name" type="text" placeholder="Имя" maxlength="40" required>
+              <input class="form__item form__item_el_bio" type="text" placeholder="О себе" maxlength="80" required>
             </fieldset>
             <button class="form__submit-btn" type="submit">Сохранить</button>
           </form>
@@ -30,10 +30,10 @@
     </header>
     <main>
       <section class="profile">
-        <img class="profile__avatar" src="./images/avatar-2.jpg" alt="">
+        <img class="profile__avatar" src="./images/avatar-2.jpg" alt="Логотип профиля">
         <div class="profile__info">
-          <h1 class="profile__name">Ирусик Ufevxbr</h1>
-          <p class="profile__bio">Водитель-дальнобойщик</p>
+          <h1 class="profile__name">Ирусик</h1>
+          <p class="profile__bio">Водитель-дальнобойщик в США</p>
           <button class="profile__edit-btn" type="button"></button>
         </div>
         <button class="profile__add-btn" type="button"></button>
@@ -89,5 +89,5 @@
       <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
   </div>
-  <script src="./scripts/popup.js"></script>
+  <script src="./js/popup.js"></script>
 </body>

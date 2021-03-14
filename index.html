@@ -10,19 +10,6 @@
 
 <body class="page">
   <div class="page__container">
-    <div class="popup">
-      <div class="popup__container">
-        <button class="popup__close-btn"></button>
-        <form class="form">
-          <h2 class="form__heading">Редактировать профиль</h2>
-          <fieldset class="form__contact-info">
-            <input class="form__item form__item_el_name" type="text" placeholder="Имя" maxlength="40" required>
-            <input class="form__item form__item_el_bio" type="text" placeholder="О себе" maxlength="80" required>
-          </fieldset>
-          <button class="form__submit-btn" type="submit">Сохранить</button>
-        </form>
-      </div>
-    </div>
     <header class="header">
       <img src="./images/header-logo.svg" class="header__logo" alt="Логотип сервиса Mesto Russia">
     </header>
@@ -32,9 +19,9 @@
         <div class="profile__info">
           <h1 class="profile__name">Ирусик</h1>
           <p class="profile__bio">Водитель-дальнобойщик в США</p>
-          <button class="profile__edit-btn" type="button"></button>
+          <button class="profile__edit-btn" type="button" aria-label="Редактировать профиль"></button>
         </div>
-        <button class="profile__add-btn" type="button"></button>
+        <button class="profile__add-btn" type="button" aria-label="Добавить фотографию"></button>
       </section>
       <section>
         <ul class="elements">
@@ -42,42 +29,42 @@
             <img class="element__image" src="./images/laramie.jpg" alt="Бескрайние просторы штата Вайоминг спокойным зимним вечером">
             <div class="element__desc">
               <h3 class="element__title">Laramie, WY</h3>
-              <button class="element__like-btn" type="button"></button>
+              <button class="element__like-btn" type="button" aria-label="Поставить лайк"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__image" src="./images/chicago.jpg" alt="Оживленная улица центрального Чикаго, закат">
             <div class="element__desc">
               <h3 class="element__title">Chicago, IL</h3>
-              <button class="element__like-btn" type="button"></button>
+              <button class="element__like-btn" type="button" aria-label="Поставить лайк"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__image" src="./images/bangor.jpg" alt="Бесконечные леса штата Мэйн в ясный летний день">
             <div class="element__desc">
               <h3 class="element__title">Bangor, ME</h3>
-              <button class="element__like-btn" type="button"></button>
+              <button class="element__like-btn" type="button" aria-label="Поставить лайк"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__image" src="./images/virgin-river.jpg" alt="Высоченные ярко-рыжие каньоны штата Аризоны">
             <div class="element__desc">
               <h3 class="element__title">Virgin River Canyon, AZ</h3>
-              <button class="element__like-btn" type="button"></button>
+              <button class="element__like-btn" type="button" aria-label="Поставить лайк"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__image" src="./images/lucile.jpg" alt="Мост через Snake River, штат Айдахо, вид сверху">
             <div class="element__desc">
               <h3 class="element__title">Lucile, ID</h3>
-              <button class="element__like-btn" type="button"></button>
+              <button class="element__like-btn" type="button" aria-label="Поставить лайк"></button>
             </div>
           </li>
           <li class="element">
             <img class="element__image" src="./images/atlanta.jpg" alt="Полная огней ночная Антланта, штат Джорджия, с высоты птичьего полета">
             <div class="element__desc">
               <h3 class="element__title">Atlanta, GA</h3>
-              <button class="element__like-btn" type="button"></button>
+              <button class="element__like-btn" type="button" aria-label="Поставить лайк"></button>
             </div>
           </li>
         </ul>
@@ -86,6 +73,19 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
+    <div class="popup">
+      <div class="popup__container">
+        <button class="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
+        <form class="form" name="edit-form">
+          <h2 class="form__heading">Редактировать профиль</h2>
+          <fieldset class="form__contact-info">
+            <input class="form__item form__item_el_name" type="text" name="name" placeholder="Имя" maxlength="40" required>
+            <input class="form__item form__item_el_bio" type="text" name="bio" placeholder="О себе" maxlength="80" required>
+          </fieldset>
+          <button class="form__submit-btn" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
   </div>
   <script src="./scripts/popup.js"></script>
 </body>

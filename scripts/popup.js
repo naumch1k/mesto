@@ -8,21 +8,25 @@ let profileName = profile.querySelector(".profile__name");
 let profileBio = profile.querySelector(".profile__bio");
 let editButton = profile.querySelector(".profile__edit-btn");
 
-editButton.addEventListener ("click", function () {
+function openPopup () {
   popup.classList.add("popup_opened");
   inputName.value = profileName.textContent;
   inputBio.value = profileBio.textContent;
-});
+}
 
-closeButton.addEventListener ("click", function () {
+function closePopup () {
   popup.classList.remove("popup_opened");
-});
+}
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileBio.textContent = inputBio.value;
-  popup.classList.remove("popup_opened");
+  closePopup ();
 }
+
+editButton.addEventListener ("click", openPopup);
+
+closeButton.addEventListener ("click", closePopup);
 
 form.addEventListener('submit', formSubmitHandler);

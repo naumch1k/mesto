@@ -25,51 +25,6 @@
       </section>
       <section class="elements content__section">
         <ul class="elements__list">
-
-          <li class="element">
-            <img class="element__image" src="./images/laramie.jpg" alt="Бескрайние просторы штата Вайоминг спокойным зимним вечером">
-            <div class="element__desc">
-              <h3 class="element__title">Laramie, WY</h3>
-              <button class="element__like-btn" type="button" aria-label="Поставить лайк"></button>
-            </div>
-            <button class="element__delete-btn" type="button" aria-label="Удалить фотографию"></button>
-          </li>
-
-          <li class="element">
-            <img class="element__image" src="./images/chicago.jpg" alt="Оживленная улица центрального Чикаго, закат">
-            <div class="element__desc">
-              <h3 class="element__title">Chicago, IL</h3>
-              <button class="element__like-btn" type="button" aria-label="Поставить лайк"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/bangor.jpg" alt="Бесконечные леса штата Мэйн в ясный летний день">
-            <div class="element__desc">
-              <h3 class="element__title">Bangor, ME</h3>
-              <button class="element__like-btn" type="button" aria-label="Поставить лайк"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/virgin-river.jpg" alt="Высоченные ярко-рыжие каньоны штата Аризоны">
-            <div class="element__desc">
-              <h3 class="element__title">Virgin River Canyon, AZ</h3>
-              <button class="element__like-btn" type="button" aria-label="Поставить лайк"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/lucile.jpg" alt="Мост через Snake River, штат Айдахо, вид сверху">
-            <div class="element__desc">
-              <h3 class="element__title">Lucile, ID</h3>
-              <button class="element__like-btn" type="button" aria-label="Поставить лайк"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/atlanta.jpg" alt="Полная огней ночная Антланта, штат Джорджия, с высоты птичьего полета">
-            <div class="element__desc">
-              <h3 class="element__title">Atlanta, GA</h3>
-              <button class="element__like-btn" type="button" aria-label="Поставить лайк"></button>
-            </div>
-          </li>
         </ul>
       </section>
     </main>
@@ -90,6 +45,16 @@
       </div>
     </div>
   </div>
+  <template id="element-template">
+    <li class="element">
+      <img class="element__image" src="" alt="">
+      <div class="element__desc">
+        <h3 class="element__title"></h3>
+        <button class="element__like-btn" type="button" aria-label="Поставить лайк"></button>
+      </div>
+      <button class="element__delete-btn" type="button" aria-label="Удалить фотографию"></button>
+    </li>
+  </template>
   <script src="./scripts/popup.js"></script>
 </body>
 </html>

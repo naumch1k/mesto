@@ -54,6 +54,10 @@ function addElement (name, link, alt) {
   element.querySelector('.element__image').alt = alt;
   element.querySelector('.element__title').textContent = name;
 
+  element.querySelector('.element__like-btn').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('element__like-btn_active');
+  })
+
   elements.append(element);
 }
 

@@ -33,21 +33,14 @@ const initialCards = [
 
 // Variables
 
-let popup = document.querySelector(".popup");
-let closeButton = popup.querySelector(".popup__close-btn");
-let form = document.querySelector(".form");
-let inputName = form.querySelector(".form__item_el_name");
-let inputBio = form.querySelector(".form__item_el_bio"); 
-let profile = document.querySelector(".profile");
-let profileName = profile.querySelector(".profile__name");
-let profileBio = profile.querySelector(".profile__bio");
-let editButton = profile.querySelector(".profile__edit-btn");
+
+const profile = document.querySelector(".profile");
 
 // Create a new element using template
 
 const elements = document.querySelector('.elements__list');
 
-function addElement (name, link, alt) {
+function addElement (name, link, alt = `Изображение ${name}`) {
   const elementTemplate = document.querySelector('#element-template').content;
   const element = elementTemplate.cloneNode(true);
   element.querySelector('.element__image').src = link;
@@ -58,34 +51,82 @@ function addElement (name, link, alt) {
     evt.target.classList.toggle('element__like-btn_active');
   })
 
-  elements.append(element);
+  elements.append(element); //КАК сделать, чтобы 6 выстраиваились с 1 по 6, а новые вставали в конец??
 }
 
 // When the page opens, there should be 6 cards added by JavaScript
 
-for (let i = 0; i < initialCards.length; i++) {
-  addElement(initialCards[i].name, initialCards[i].link, initialCards[i].alt);
+function initializePhotos(arr) {
+  arr.forEach(element => {
+    addElement(element.name, element.link, element.alt);
+  });
 }
 
-function openPopup () {
-  popup.classList.add("popup_opened");
+initializePhotos(initialCards);
+
+//OR
+
+/* for (let i = 0; i < initialCards.length; i++) {
+  addElement(initialCards[i].name, initialCards[i].link, initialCards[i].alt);
+} */
+
+// Edit Profile Popup
+
+const popupEdit = document.querySelector('.popup-edit');
+const editForm = document.querySelector(".edit-form");
+const editButton = profile.querySelector(".profile__edit-btn");
+const editFormCloseBtn = popupEdit.querySelector(".popup__close-btn");
+const inputName = editForm.querySelector(".form__item_el_name");
+const inputBio = editForm.querySelector(".form__item_el_bio");
+
+const profileName = profile.querySelector(".profile__name");
+const profileBio = profile.querySelector(".profile__bio");
+
+
+function openPopupEdit () {
+  popupEdit.classList.add("popup_opened");
   inputName.value = profileName.textContent;
   inputBio.value = profileBio.textContent;
 }
 
-function closePopup () {
-  popup.classList.remove("popup_opened");
+function closePopupEdit () {
+  popupEdit.classList.remove("popup_opened");
 }
 
-function formSubmitHandler (evt) {
+function editFormSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileBio.textContent = inputBio.value;
-  closePopup ();
+  closePopupEdit ();
 }
 
-editButton.addEventListener ("click", openPopup);
+editButton.addEventListener ("click", openPopupEdit);
+editFormCloseBtn.addEventListener ("click", closePopupEdit);
+editForm.addEventListener('submit', editFormSubmitHandler);
 
-closeButton.addEventListener ("click", closePopup);
+// Add Element Popup
 
-form.addEventListener('submit', formSubmitHandler);
+const popupAdd = document.querySelector('.popup-add');
+const addForm = document.querySelector(".add-form");
+const addButton = profile.querySelector(".profile__add-btn");
+const addFormCloseBtn = popupAdd.querySelector(".popup-add__close-btn");
+const inputElName = addForm.querySelector(".form__item_el_name");
+const inputElLink = addForm.querySelector(".form__item_el_link");
+
+function openPopupAdd () {
+  popupAdd.classList.add("popup_opened");
+}
+
+function closePopupAdd () {
+  popupAdd.classList.remove("popup_opened");
+}
+
+function addFormSubmitHandler (evt) {
+  evt.preventDefault();
+  addElement(inputElName.value, inputElLink.value);
+  closePopupAdd ();
+}
+
+addButton.addEventListener ("click", openPopupAdd);
+addFormCloseBtn.addEventListener ("click", closePopupAdd);
+addForm.addEventListener('submit', addFormSubmitHandler);

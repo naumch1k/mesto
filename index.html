@@ -32,7 +32,7 @@
       <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
     <div class="modal modal_type_edit">
-      <div class="modal__container">
+      <div class="modal__container modal__container_type_form">
         <button class="modal__close-btn" type="button" aria-label="Закрыть окно"></button>
         <form class="form edit-form" name="edit-form">
           <h2 class="form__heading">Редактировать профиль</h2>
@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="modal modal_type_add">
-      <div class="modal__container">
+      <div class="modal__container modal__container_type_form">
         <button class="modal__close-btn" type="button" aria-label="Закрыть окно"></button>
         <form class="form add-form" name="add-form">
           <h2 class="form__heading">Новое место</h2>
@@ -55,6 +55,15 @@
           </fieldset>
           <button class="form__submit-btn" type="submit">Создать</button>
         </form>
+      </div>
+    </div>
+    <div class="modal modal_type_image">
+      <div class="modal__container modal__container_type_image">
+        <button class="modal__close-btn" type="button" aria-label="Закрыть окно"></button>
+        <figure class="modal__figure">
+          <img class="modal__image" src="#">
+          <figcaption class="modal__image-caption"></figcaption>
+        </figure>
       </div>
     </div>
   </div>

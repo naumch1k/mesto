@@ -36,6 +36,7 @@ const initialCards = [
 const profile = document.querySelector(".profile");
 const editModal = document.querySelector('.modal_type_edit');
 const addModal = document.querySelector('.modal_type_add');
+const imageModal = document.querySelector('.modal_type_image');
 
 // open modal
 
@@ -58,7 +59,7 @@ openAddModalBtn.addEventListener ("click", () => openModal(addModal));
 
 const closeEditModalBtn = editModal.querySelector(".modal__close-btn");
 const closeAddModalBtn = addModal.querySelector(".modal__close-btn");
-
+const closeImageModalBtn = imageModal.querySelector(".modal__close-btn");
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
@@ -66,6 +67,7 @@ function closeModal(modal) {
 
 closeEditModalBtn.addEventListener ("click", () => closeModal(editModal));
 closeAddModalBtn.addEventListener ("click", () => closeModal(addModal));
+closeImageModalBtn.addEventListener ("click", () => closeModal(imageModal));
 
 
 // Create a new element using template
@@ -75,7 +77,9 @@ const elements = document.querySelector('.elements__list');
 function addElement (name, link, alt = `Изображение ${name}`, pos = 'prepend') {
   const elementTemplate = document.querySelector('#element-template').content;
   const element = elementTemplate.cloneNode(true);
-  element.querySelector('.element__image').src = link;
+  const elementImage = element.querySelector('.element__image');
+
+  elementImage.src = link;
   element.querySelector('.element__image').alt = alt;
   element.querySelector('.element__title').textContent = name;
 
@@ -86,6 +90,14 @@ function addElement (name, link, alt = `Изображение ${name}`, pos = '
   element.querySelector('.element__delete-btn').addEventListener('click', function (evt) {
     evt.target.parentElement.remove();
   })
+
+  function imageClickHandler () {
+    imageModal.querySelector('.modal__image').src = link;
+    imageModal.querySelector('.modal__image-caption').textContent = name;
+    openModal(imageModal);
+  }
+
+  elementImage.addEventListener('click', imageClickHandler);
 
   if (pos === 'append') {
     elements.append(element);

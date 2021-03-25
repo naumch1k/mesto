@@ -31,11 +31,42 @@ const initialCards = [
   }
 ];
 
-// Variables
+// variables
 
 const profile = document.querySelector(".profile");
-const popupEdit = document.querySelector('.popup-edit');
-const popupAdd = document.querySelector('.popup-add');
+const editModal = document.querySelector('.popup-edit');
+const addModal = document.querySelector('.popup-add');
+
+// open modal
+
+const openEditModalBtn = profile.querySelector(".profile__edit-btn");
+const openAddModalBtn = profile.querySelector(".profile__add-btn");
+
+function openModal(modal) {
+  modal.classList.add("popup_opened");
+  
+  if (modal === editModal) {
+    inputName.value = profileName.textContent;
+    inputBio.value = profileBio.textContent;
+  }
+}
+
+openEditModalBtn.addEventListener ("click", () => openModal(editModal));
+openAddModalBtn.addEventListener ("click", () => openModal(addModal));
+
+// close modal
+
+const closeEditModalBtn = editModal.querySelector(".popup__close-btn");
+const closeAddModalBtn = addModal.querySelector(".popup-add__close-btn");
+
+
+function closeModal(modal) {
+  modal.classList.remove("popup_opened");
+}
+
+closeEditModalBtn.addEventListener ("click", () => closeModal(editModal));
+closeAddModalBtn.addEventListener ("click", () => closeModal(addModal));
+
 
 // Create a new element using template
 
@@ -71,66 +102,36 @@ initializePhotos(initialCards);
   addElement(initialCards[i].name, initialCards[i].link, initialCards[i].alt);
 } */
 
-// Close popup
-
-const editFormCloseBtn = popupEdit.querySelector(".popup__close-btn");
-const addFormCloseBtn = popupAdd.querySelector(".popup-add__close-btn");
-
-function closePopup() {
-  popupEdit.classList.remove("popup_opened");
-  popupAdd.classList.remove("popup_opened");
-}
-
-editFormCloseBtn.addEventListener ("click", closePopup);
-addFormCloseBtn.addEventListener ("click", closePopup);
-
-
-
 // Edit Profile Popup
 
 const editForm = document.querySelector(".edit-form");
-const editButton = profile.querySelector(".profile__edit-btn");
 const inputName = editForm.querySelector(".form__item_el_name");
 const inputBio = editForm.querySelector(".form__item_el_bio");
-
 const profileName = profile.querySelector(".profile__name");
 const profileBio = profile.querySelector(".profile__bio");
 
-
-function openPopupEdit() {
-  popupEdit.classList.add("popup_opened");
-  inputName.value = profileName.textContent;
-  inputBio.value = profileBio.textContent;
-}
 
 function editFormSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileBio.textContent = inputBio.value;
-  closePopup();
+  closeModal(editModal);
 }
 
-editButton.addEventListener ("click", openPopupEdit);
 editForm.addEventListener('submit', editFormSubmitHandler);
 
 // Add Element Popup
 
 const addForm = document.querySelector(".add-form");
-const addButton = profile.querySelector(".profile__add-btn");
 const inputElName = addForm.querySelector(".form__item_el_name");
 const inputElLink = addForm.querySelector(".form__item_el_link");
-
-function openPopupAdd() {
-  popupAdd.classList.add("popup_opened");
-}
 
 function addFormSubmitHandler (evt) {
   evt.preventDefault();
   addElement(inputElName.value, inputElLink.value);
   inputElName.value = "";
   inputElLink.value = "";
-  closePopup();
+  closeModal(addModal);
 }
 
-addButton.addEventListener ("click", openPopupAdd);
 addForm.addEventListener('submit', addFormSubmitHandler);

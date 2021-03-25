@@ -33,8 +33,9 @@ const initialCards = [
 
 // Variables
 
-
 const profile = document.querySelector(".profile");
+const popupEdit = document.querySelector('.popup-edit');
+const popupAdd = document.querySelector('.popup-add');
 
 // Create a new element using template
 
@@ -70,12 +71,25 @@ initializePhotos(initialCards);
   addElement(initialCards[i].name, initialCards[i].link, initialCards[i].alt);
 } */
 
+// Close popup
+
+const editFormCloseBtn = popupEdit.querySelector(".popup__close-btn");
+const addFormCloseBtn = popupAdd.querySelector(".popup-add__close-btn");
+
+function closePopup() {
+  popupEdit.classList.remove("popup_opened");
+  popupAdd.classList.remove("popup_opened");
+}
+
+editFormCloseBtn.addEventListener ("click", closePopup);
+addFormCloseBtn.addEventListener ("click", closePopup);
+
+
+
 // Edit Profile Popup
 
-const popupEdit = document.querySelector('.popup-edit');
 const editForm = document.querySelector(".edit-form");
 const editButton = profile.querySelector(".profile__edit-btn");
-const editFormCloseBtn = popupEdit.querySelector(".popup__close-btn");
 const inputName = editForm.querySelector(".form__item_el_name");
 const inputBio = editForm.querySelector(".form__item_el_bio");
 
@@ -83,50 +97,40 @@ const profileName = profile.querySelector(".profile__name");
 const profileBio = profile.querySelector(".profile__bio");
 
 
-function openPopupEdit () {
+function openPopupEdit() {
   popupEdit.classList.add("popup_opened");
   inputName.value = profileName.textContent;
   inputBio.value = profileBio.textContent;
-}
-
-function closePopupEdit () {
-  popupEdit.classList.remove("popup_opened");
 }
 
 function editFormSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = inputName.value;
   profileBio.textContent = inputBio.value;
-  closePopupEdit ();
+  closePopup();
 }
 
 editButton.addEventListener ("click", openPopupEdit);
-editFormCloseBtn.addEventListener ("click", closePopupEdit);
 editForm.addEventListener('submit', editFormSubmitHandler);
 
 // Add Element Popup
 
-const popupAdd = document.querySelector('.popup-add');
 const addForm = document.querySelector(".add-form");
 const addButton = profile.querySelector(".profile__add-btn");
-const addFormCloseBtn = popupAdd.querySelector(".popup-add__close-btn");
 const inputElName = addForm.querySelector(".form__item_el_name");
 const inputElLink = addForm.querySelector(".form__item_el_link");
 
-function openPopupAdd () {
+function openPopupAdd() {
   popupAdd.classList.add("popup_opened");
-}
-
-function closePopupAdd () {
-  popupAdd.classList.remove("popup_opened");
 }
 
 function addFormSubmitHandler (evt) {
   evt.preventDefault();
   addElement(inputElName.value, inputElLink.value);
-  closePopupAdd ();
+  inputElName.value = "";
+  inputElLink.value = "";
+  closePopup();
 }
 
 addButton.addEventListener ("click", openPopupAdd);
-addFormCloseBtn.addEventListener ("click", closePopupAdd);
 addForm.addEventListener('submit', addFormSubmitHandler);

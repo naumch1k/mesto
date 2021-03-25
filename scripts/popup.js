@@ -34,8 +34,8 @@ const initialCards = [
 // variables
 
 const profile = document.querySelector(".profile");
-const editModal = document.querySelector('.popup-edit');
-const addModal = document.querySelector('.popup-add');
+const editModal = document.querySelector('.modal_type_edit');
+const addModal = document.querySelector('.modal_type_add');
 
 // open modal
 
@@ -43,7 +43,7 @@ const openEditModalBtn = profile.querySelector(".profile__edit-btn");
 const openAddModalBtn = profile.querySelector(".profile__add-btn");
 
 function openModal(modal) {
-  modal.classList.add("popup_opened");
+  modal.classList.add("modal_opened");
   
   if (modal === editModal) {
     editFormInputName.value = profileName.textContent;
@@ -56,12 +56,12 @@ openAddModalBtn.addEventListener ("click", () => openModal(addModal));
 
 // close modal
 
-const closeEditModalBtn = editModal.querySelector(".popup__close-btn");
-const closeAddModalBtn = addModal.querySelector(".popup-add__close-btn");
+const closeEditModalBtn = editModal.querySelector(".modal__close-btn");
+const closeAddModalBtn = addModal.querySelector(".modal__close-btn");
 
 
 function closeModal(modal) {
-  modal.classList.remove("popup_opened");
+  modal.classList.remove("modal_opened");
 }
 
 closeEditModalBtn.addEventListener ("click", () => closeModal(editModal));

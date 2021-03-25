@@ -1,4 +1,4 @@
-.popup__close-btn {
+.modal__close-btn {
   width: 40px;
   height: 40px;
   border: none;
@@ -11,19 +11,19 @@
   transition: opacity .5s ease;
 }
 
-.popup__close-btn:hover {
+.modal__close-btn:hover {
   opacity: .6;
 }
 
 @media screen and (max-width: 618px) {
-  .popup__close-btn {
+  .modal__close-btn {
     top: -59px;
     right: 5px;
   }
 }
 
 @media screen and (max-width: 414px) {
-  .popup__close-btn {
+  .modal__close-btn {
     background-size: 38px;
     width: 26px;
     height: 26px;
@@ -33,7 +33,7 @@
 }
 
 @media screen and (max-width: 823px) and (max-height: 414px) {
-  .popup__close-btn {
+  .modal__close-btn {
     top: 0;
     right: -45px;
   }

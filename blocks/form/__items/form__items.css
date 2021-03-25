@@ -1,11 +1,11 @@
-.form__contact-info {
+.form__items {
   margin: 0 0 48px;
   padding: 0;
   border: 0;
 }
 
 @media screen and (max-width: 414px) {
-  .form__contact-info {
+  .form__items {
     margin: 0 0 45px;
   }
 }

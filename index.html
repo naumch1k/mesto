@@ -31,12 +31,12 @@
     <footer class="footer page__footer">
       <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
     </footer>
-    <div class="popup popup-edit">
-      <div class="popup__container">
-        <button class="popup__close-btn popup-edit__close-btn" type="button" aria-label="Закрыть окно"></button>
+    <div class="modal modal_type_edit">
+      <div class="modal__container">
+        <button class="modal__close-btn" type="button" aria-label="Закрыть окно"></button>
         <form class="form edit-form" name="edit-form">
           <h2 class="form__heading">Редактировать профиль</h2>
-          <fieldset class="form__contact-info">
+          <fieldset class="form__items">
             <input class="form__item form__item_el_name" type="text" name="name" placeholder="Имя" maxlength="40" required>
             <input class="form__item form__item_el_bio" type="text" name="bio" placeholder="О себе" maxlength="80" required>
           </fieldset>
@@ -44,12 +44,12 @@
         </form>
       </div>
     </div>
-    <div class="popup popup-add">
-      <div class="popup__container">
-        <button class="popup__close-btn popup-add__close-btn" type="button" aria-label="Закрыть окно"></button>
+    <div class="modal modal_type_add">
+      <div class="modal__container">
+        <button class="modal__close-btn" type="button" aria-label="Закрыть окно"></button>
         <form class="form add-form" name="add-form">
           <h2 class="form__heading">Новое место</h2>
-          <fieldset class="form__contact-info">
+          <fieldset class="form__items">
             <input class="form__item form__item_el_name" type="text" name="name" placeholder="Название" maxlength="40" required>
             <input class="form__item form__item_el_link" type="text" name="link" placeholder="Ссылка на картинку" required>
           </fieldset>

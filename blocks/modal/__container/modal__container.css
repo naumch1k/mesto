@@ -1,4 +1,4 @@
-.popup__container {
+.modal__container {
   position: relative;
   width: 430px;
   box-sizing: border-box;
@@ -9,20 +9,20 @@
 }
 
 @media screen and (max-width: 618px) {
-  .popup__container {
+  .modal__container {
     width: 376px;
   }
 }
 
 @media screen and (max-width: 414px) {
-  .popup__container {
+  .modal__container {
     width: calc(100% - 38px);
     padding: 25px 22px;
   }
 }
 
 @media screen and (max-height: 320px) {
-  .popup__container {
+  .modal__container {
     padding: 20px 36px;
   }
 }

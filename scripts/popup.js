@@ -69,12 +69,11 @@ closeEditModalBtn.addEventListener ("click", () => closeModal(editModal));
 closeAddModalBtn.addEventListener ("click", () => closeModal(addModal));
 closeImageModalBtn.addEventListener ("click", () => closeModal(imageModal));
 
-
-// Create a new element using template
+// create an element using template
 
 const elements = document.querySelector('.elements__list');
 
-function addElement (name, link, alt = `Изображение ${name}`, pos = 'prepend') {
+function createElement (name, link, alt = `Изображение ${name}`) {
   const elementTemplate = document.querySelector('#element-template').content;
   const element = elementTemplate.cloneNode(true);
   const elementImage = element.querySelector('.element__image');
@@ -101,25 +100,28 @@ function addElement (name, link, alt = `Изображение ${name}`, pos = '
   }
 
   elementImage.addEventListener('click', imageClickHandler);
-
-  if (pos === 'append') {
-    elements.append(element);
-  } else {
-    elements.prepend(element);
-  } 
+  
+  return element;
 }
 
-// When the page opens, there should be 6 cards added by JavaScript
+// add an element to elements
+
+const addElement = function(name, link, alt) {
+  const element = createElement(name, link, alt);
+  elements.append(element);
+}
+
+// when page opens, there should be 6 elements added by JavaScript
 
 function initializePhotos(arr) {
-  arr.forEach(element => {
-    addElement(element.name, element.link, element.alt, 'append');
+  arr.forEach((item) => {
+    addElement(item.name, item.link, item.alt);
   });
 }
 
 initializePhotos(initialCards);
 
-// Edit Profile
+// edit profile
 
 const editForm = document.querySelector(".edit-form");
 const editFormInputName = editForm.querySelector(".form__item_el_name");
@@ -137,7 +139,7 @@ function editFormSubmitHandler (evt) {
 
 editForm.addEventListener('submit', editFormSubmitHandler);
 
-// Add Element
+// add element
 
 const addForm = document.querySelector(".add-form");
 const addFormInputName = addForm.querySelector(".form__item_el_name");
@@ -145,7 +147,8 @@ const addFormInputLink = addForm.querySelector(".form__item_el_link");
 
 function addFormSubmitHandler (evt) {
   evt.preventDefault();
-  addElement(addFormInputName.value, addFormInputLink.value);
+  const newElement = createElement(addFormInputName.value, addFormInputLink.value);
+  elements.prepend(newElement);
   addFormInputName.value = "";
   addFormInputLink.value = "";
   closeModal(addModal);

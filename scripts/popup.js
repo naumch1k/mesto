@@ -45,14 +45,14 @@ const openAddModalBtn = profile.querySelector(".profile__add-btn");
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  
-  if (modal === editModal) {
-    editFormInputName.value = profileName.textContent;
-    editFormInputBio.value = profileBio.textContent;
-  }
 }
 
-openEditModalBtn.addEventListener ("click", () => openModal(editModal));
+openEditModalBtn.addEventListener ('click', function () {
+  openModal(editModal);
+  editFormInputName.value = profileName.textContent;
+  editFormInputBio.value = profileBio.textContent;
+});
+
 openAddModalBtn.addEventListener ("click", () => openModal(addModal));
 
 // close modal

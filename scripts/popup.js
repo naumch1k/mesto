@@ -80,7 +80,7 @@ function addElement (name, link, alt = `Изображение ${name}`, pos = '
   const elementImage = element.querySelector('.element__image');
 
   elementImage.src = link;
-  element.querySelector('.element__image').alt = alt;
+  elementImage.alt = alt;
   element.querySelector('.element__title').textContent = name;
 
   element.querySelector('.element__like-btn').addEventListener('click', function (evt) {
@@ -88,7 +88,7 @@ function addElement (name, link, alt = `Изображение ${name}`, pos = '
   })
 
   element.querySelector('.element__delete-btn').addEventListener('click', function (evt) {
-    evt.target.parentElement.remove();
+    evt.target.closest('.element').remove();
   })
 
   function imageClickHandler () {

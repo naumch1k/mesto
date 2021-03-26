@@ -91,9 +91,12 @@ function addElement (name, link, alt = `Изображение ${name}`, pos = '
     evt.target.closest('.element').remove();
   })
 
+  const imageModalImage = imageModal.querySelector('.modal__image');
+  const imageModalCaption = imageModal.querySelector('.modal__image-caption');
+
   function imageClickHandler () {
-    imageModal.querySelector('.modal__image').src = link;
-    imageModal.querySelector('.modal__image-caption').textContent = name;
+    imageModalImage.src = link;
+    imageModalCaption.textContent = name;
     openModal(imageModal);
   }
 

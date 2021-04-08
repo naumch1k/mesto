@@ -1,7 +1,7 @@
 .form__item {
   font-family: inherit;
   width: 100%;
-  margin: 0 0 19px;
+  margin: 19px 0 0;
   padding: 12px 0 9px;
   box-sizing: border-box;
   border: 0;
@@ -11,10 +11,10 @@
   outline: none;
 }
 
-.form__item:last-of-type {
+.form__item:first-of-type {
   margin: 0;
 }
 
 .form__item::placeholder {
-  color: #000;
+  color: #c4c4c4;
 }

@@ -40,4 +40,5 @@
 @import url('../blocks/form/__heading/form__heading.css');
 @import url('../blocks/form/__items/form__items.css');
 @import url('../blocks/form/__item/form__item.css');
+@import url('../blocks/form/__error/form__error.css');
 @import url('../blocks/form/__submit-btn/form__submit-btn.css');

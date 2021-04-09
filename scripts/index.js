@@ -38,6 +38,18 @@ const editModal = document.querySelector('.modal_type_edit');
 const addModal = document.querySelector('.modal_type_add');
 const imageModal = document.querySelector('.modal_type_image');
 
+function escKeyHandler(evt) {
+  if (evt.key === "Escape") {
+    if (addModal.classList.contains('modal_opened')) {
+      closeModal(addModal);
+    } else if (editModal.classList.contains('modal_opened')) {
+      closeModal(editModal);
+    } else if (imageModal.classList.contains('modal_opened')) {
+      closeModal(imageModal);
+    }
+  }
+}
+
 // open modal
 
 const openEditModalBtn = profile.querySelector(".profile__edit-btn");
@@ -45,6 +57,7 @@ const openAddModalBtn = profile.querySelector(".profile__add-btn");
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener('keydown', escKeyHandler);
 }
 
 openEditModalBtn.addEventListener ('click', function () {
@@ -63,6 +76,7 @@ const closeImageModalBtn = imageModal.querySelector(".modal__close-btn");
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener('keydown', escKeyHandler);
 }
 
 closeEditModalBtn.addEventListener ("click", () => closeModal(editModal));

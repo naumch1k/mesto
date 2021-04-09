@@ -149,8 +149,7 @@ function addFormSubmitHandler (evt) {
   evt.preventDefault();
   const newElement = createElement(addFormInputName.value, addFormInputLink.value);
   elements.prepend(newElement);
-  addFormInputName.value = "";
-  addFormInputLink.value = "";
+  addForm.reset();
   closeModal(addModal);
 }
 

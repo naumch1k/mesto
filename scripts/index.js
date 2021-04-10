@@ -33,43 +33,37 @@ const initialCards = [
 
 // variables
 
-const profile = document.querySelector(".profile");
 const editModal = document.querySelector('.modal_type_edit');
 const addModal = document.querySelector('.modal_type_add');
 const imageModal = document.querySelector('.modal_type_image');
 
-// open modal
-
+const profile = document.querySelector(".profile");
 const openEditModalBtn = profile.querySelector(".profile__edit-btn");
 const openAddModalBtn = profile.querySelector(".profile__add-btn");
+const profileName = profile.querySelector(".profile__name");
+const profileBio = profile.querySelector(".profile__bio");
 
-function openModal(modal) {
+const elements = document.querySelector('.elements__list');
+
+const editForm = document.querySelector(".edit-form");
+const editFormInputName = editForm.querySelector(".form__item_el_name");
+const editFormInputBio = editForm.querySelector(".form__item_el_bio");
+
+const addForm = document.querySelector(".add-form");
+const addFormInputName = addForm.querySelector(".form__item_el_name");
+const addFormInputLink = addForm.querySelector(".form__item_el_link");
+const addFormSubmitButton = addForm.querySelector(".form__submit-btn");
+
+const imageModalImage = imageModal.querySelector('.modal__image');
+const imageModalCaption = imageModal.querySelector('.modal__image-caption');
+
+// functions
+
+const openModal = ((modal) => {
   modal.classList.add("modal_opened");
-  document.addEventListener('keydown', closeWithEscButton);
+  document.addEventListener('keydown', closeModalWithEscButton);
   setOverlayClickEventListener(modal);
-}
-
-openEditModalBtn.addEventListener ('click', function () {
-  openModal(editModal);
-  editFormInputName.value = profileName.textContent;
-  editFormInputBio.value = profileBio.textContent;
 });
-
-openAddModalBtn.addEventListener ("click", () => openModal(addModal));
-
-// close modal
-
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener('keydown', closeWithEscButton);
-}
-
-const closeWithEscButton = function(evt) {
-  const openedModal = document.querySelector('.modal_opened');
-  if (evt.key === "Escape") {
-    closeModal(openedModal);
-  }
-}
 
 const setOverlayClickEventListener = ((modal) => {
   modal.addEventListener('click', (evt) => {
@@ -79,11 +73,20 @@ const setOverlayClickEventListener = ((modal) => {
   })
 });
 
+const closeModal = ((modal) => {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener('keydown', closeModalWithEscButton);
+});
+
+const closeModalWithEscButton = ((evt) => {
+  const openedModal = document.querySelector('.modal_opened');
+  if (evt.key === "Escape") {
+    closeModal(openedModal);
+  }
+});
+
 // create an element using template
-
-const elements = document.querySelector('.elements__list');
-
-function createElement (name, link, alt = `Изображение ${name}`) {
+const createElement = ((name, link, alt = `Изображение ${name}`) => {
   const elementTemplate = document.querySelector('#element-template').content;
   const element = elementTemplate.cloneNode(true);
   const elementImage = element.querySelector('.element__image');
@@ -100,75 +103,65 @@ function createElement (name, link, alt = `Изображение ${name}`) {
     evt.target.closest('.element').remove();
   })
 
-  const imageModalImage = imageModal.querySelector('.modal__image');
-  const imageModalCaption = imageModal.querySelector('.modal__image-caption');
-
-  function imageClickHandler () {
+  const imageClickHandler = (() => {
     imageModalImage.src = link;
     imageModalCaption.textContent = name;
     imageModalImage.alt = `Изображение ${name}`;
     openModal(imageModal);
-  }
+  });
 
   elementImage.addEventListener('click', imageClickHandler);
   
   return element;
-}
+});
 
-// add an element to elements
-
-const addElement = function(name, link, alt) {
+// add a new element to elements
+const addElement = ((name, link, alt) => {
   const element = createElement(name, link, alt);
   elements.append(element);
-}
+});
 
-// when page opens, there should be 6 elements added by JavaScript
-
-function initializePhotos(arr) {
-  arr.forEach((item) => {
-    addElement(item.name, item.link, item.alt);
-  });
-}
-
-initializePhotos(initialCards);
-
-// edit profile
-
-const editForm = document.querySelector(".edit-form");
-const editFormInputName = editForm.querySelector(".form__item_el_name");
-const editFormInputBio = editForm.querySelector(".form__item_el_bio");
-const profileName = profile.querySelector(".profile__name");
-const profileBio = profile.querySelector(".profile__bio");
-
-
-function editFormSubmitHandler (evt) {
+const editFormSubmitHandler = ((evt) => {
   evt.preventDefault();
   profileName.textContent = editFormInputName.value;
   profileBio.textContent = editFormInputBio.value;
   closeModal(editModal);
-}
+});
 
-editForm.addEventListener('submit', editFormSubmitHandler);
-
-// add element
-
-const addForm = document.querySelector(".add-form");
-const addFormInputName = addForm.querySelector(".form__item_el_name");
-const addFormInputLink = addForm.querySelector(".form__item_el_link");
-const addFormSubmitButton = addForm.querySelector(".form__submit-btn");
-
-const disableFormSubmitButton = (button) => {
-  button.classList.add("form__submit-btn_disabled");
-  button.setAttribute("disabled", true);
-}
-
-function addFormSubmitHandler (evt) {
+const addFormSubmitHandler = ((evt) => {
   evt.preventDefault();
   const newElement = createElement(addFormInputName.value, addFormInputLink.value);
   elements.prepend(newElement);
   addForm.reset();
   disableFormSubmitButton(addFormSubmitButton);
   closeModal(addModal);
+});
+
+const disableFormSubmitButton = (button) => {
+  button.classList.add("form__submit-btn_disabled");
+  button.setAttribute("disabled", true);
 }
 
+// event listeners
+
+editForm.addEventListener('submit', editFormSubmitHandler);
 addForm.addEventListener('submit', addFormSubmitHandler);
+
+openEditModalBtn.addEventListener ('click', function () {
+  openModal(editModal);
+  editFormInputName.value = profileName.textContent;
+  editFormInputBio.value = profileBio.textContent;
+});
+
+openAddModalBtn.addEventListener ("click", () => openModal(addModal));
+
+
+// when page opens, there should be 6 elements added by JavaScript
+
+const initializePhotos = ((arr) => {
+  arr.forEach((item) => {
+    addElement(item.name, item.link, item.alt);
+  });
+});
+
+initializePhotos(initialCards);

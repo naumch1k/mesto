@@ -154,12 +154,19 @@ editForm.addEventListener('submit', editFormSubmitHandler);
 const addForm = document.querySelector(".add-form");
 const addFormInputName = addForm.querySelector(".form__item_el_name");
 const addFormInputLink = addForm.querySelector(".form__item_el_link");
+const addFormSubmitButton = addForm.querySelector(".form__submit-btn");
+
+const disableFormSubmitButton = (button) => {
+  button.classList.add("form__submit-btn_disabled");
+  button.setAttribute("disabled", true);
+}
 
 function addFormSubmitHandler (evt) {
   evt.preventDefault();
   const newElement = createElement(addFormInputName.value, addFormInputLink.value);
   elements.prepend(newElement);
   addForm.reset();
+  disableFormSubmitButton(addFormSubmitButton);
   closeModal(addModal);
 }
 

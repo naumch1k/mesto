@@ -46,7 +46,7 @@ const openAddModalBtn = profile.querySelector(".profile__add-btn");
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener('keydown', closeWithEscButton);
-  modal.addEventListener('click', closeWithOverlayClick);
+  setOverlayClickEventListener(modal);
 }
 
 openEditModalBtn.addEventListener ('click', function () {
@@ -59,36 +59,25 @@ openAddModalBtn.addEventListener ("click", () => openModal(addModal));
 
 // close modal
 
-const closeEditModalBtn = editModal.querySelector(".modal__close-btn");
-const closeAddModalBtn = addModal.querySelector(".modal__close-btn");
-const closeImageModalBtn = imageModal.querySelector(".modal__close-btn");
-
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener('keydown', closeWithEscButton);
 }
 
-closeEditModalBtn.addEventListener ("click", () => closeModal(editModal));
-closeAddModalBtn.addEventListener ("click", () => closeModal(addModal));
-closeImageModalBtn.addEventListener ("click", () => closeModal(imageModal));
-
 const closeWithEscButton = function(evt) {
+  const openedModal = document.querySelector('.modal_opened');
   if (evt.key === "Escape") {
-    if (addModal.classList.contains('modal_opened')) {
-      closeModal(addModal);
-    } else if (editModal.classList.contains('modal_opened')) {
-      closeModal(editModal);
-    } else if (imageModal.classList.contains('modal_opened')) {
-      closeModal(imageModal);
-    }
+    closeModal(openedModal);
   }
 }
 
-const closeWithOverlayClick = function(evt) {
-  if (evt.target.classList.contains('modal')) {
-    closeModal(evt.path[0]);
-  }
-}
+const setOverlayClickEventListener = ((modal) => {
+  modal.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('modal') || evt.target.classList.contains('modal__close-btn')) {
+      closeModal(modal);
+    }
+  })
+});
 
 // create an element using template
 

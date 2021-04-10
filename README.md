@@ -11,6 +11,7 @@
 * Edit user profile
 * Add and remove pics
 * "Like" for pics
+* Live form validation
 
 ## Technologies
 * Flexbox and Grid Layout
@@ -23,4 +24,5 @@
 * JavaScript
 
 ## To Do
-* Form data validation
+* Likes counter
+* Change user avatar pic

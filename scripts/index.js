@@ -106,6 +106,7 @@ function createElement (name, link, alt = `Изображение ${name}`) {
   function imageClickHandler () {
     imageModalImage.src = link;
     imageModalCaption.textContent = name;
+    imageModalImage.alt = `Изображение ${name}`;
     openModal(imageModal);
   }
 

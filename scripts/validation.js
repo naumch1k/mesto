@@ -30,12 +30,12 @@ const enableValidation = (currentSettings) => {
 const setEventListeners = (form, inputList, input, currentSettings) => {
   const submitButton = form.querySelector(currentSettings.submitButtonSelector);
 
-  toggleSubmitButtonState(inputList, submitButton, currentSettings); // disable submit button before any data entry
-
   input.addEventListener('input', () => {
     isValid(form, input, currentSettings);
     toggleSubmitButtonState(inputList, submitButton, currentSettings);
   });
+
+  toggleSubmitButtonState(inputList, submitButton, currentSettings); // disable submit button before any data entry
 };
 
 // check input validity
@@ -79,9 +79,13 @@ const hasInvalidInput = (inputList)  => {
 // enable/disable form submit button
 
 const toggleSubmitButtonState = (inputList, submitButton, currentSettings) => {
-  return (hasInvalidInput(inputList)) 
-  ? submitButton.classList.add(currentSettings.inactiveButtonClass) 
-  : submitButton.classList.remove(currentSettings.inactiveButtonClass);
+  if (hasInvalidInput(inputList)) {
+    submitButton.setAttribute("disabled", true);
+    submitButton.classList.add(currentSettings.inactiveButtonClass);
+  } else {
+    submitButton.classList.remove(currentSettings.inactiveButtonClass);
+    submitButton.removeAttribute("disabled");
+  }
 };
 
 enableValidation(validationSettings);

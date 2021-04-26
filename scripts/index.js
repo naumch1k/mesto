@@ -1,5 +1,6 @@
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
+import {initialCards} from './initial-сards.js';
 
 // forms validation
 
@@ -106,39 +107,6 @@ openEditModalBtn.addEventListener ('click', function () {
 openAddModalBtn.addEventListener ("click", () => openModal(addModal));
 
 // when page opens, there should be 6 elements added by JavaScript
-
-const initialCards = [
-  {
-    name: 'Laramie, WY',
-    link: './images/laramie.jpg',
-    alt: 'Бескрайние просторы штата Вайоминг спокойным зимним вечером'
-  },
-  {
-    name: 'Chicago, IL',
-    link: './images/chicago.jpg',
-    alt: 'Оживленная улица центрального Чикаго, закат'
-  },
-  {
-    name: 'Bangor, ME',
-    link: './images/bangor.jpg',
-    alt: 'Бесконечные леса штата Мэйн в ясный летний день'
-  },
-  {
-    name: 'Virgin River Canyon, AZ',
-    link: './images/virgin-river.jpg',
-    alt: 'Высоченные ярко-рыжие каньоны штата Аризоны'
-  },
-  {
-    name: 'Lucile, ID',
-    link: './images/lucile.jpg',
-    alt: 'Мост через Snake River, штат Айдахо, вид сверху'
-  },
-  {
-    name: 'Atlanta, GA',
-    link: './images/atlanta.jpg',
-    alt: 'Полная огней ночная Антланта, штат Джорджия, с высоты птичьего полета'
-  }
-];
 
 initialCards.forEach((item) => {
   const element = new Card(item, Card.selectors.template);

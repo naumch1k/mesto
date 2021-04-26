@@ -53,12 +53,13 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._image = this._element.querySelector(Card.selectors.elementImage);
 
     this._setEventListeners();
   
-    this._element.querySelector(Card.selectors.elementImage).src = this._link;
+    this._image.src = this._link;
     this._element.querySelector(Card.selectors.elementTitle).textContent = this._name;
-    this._element.querySelector(Card.selectors.elementImage).alt = this._alt;
+    this._image.alt = this._alt;
   
     return this._element;
   }

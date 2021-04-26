@@ -93,7 +93,7 @@ const disableFormSubmitButton = (button) => {
   button.setAttribute("disabled", true);
 }
 
-const createCard = function(data, cardSelector) {
+const createCard = (data, cardSelector) => {
   const element = new Card(data, cardSelector);
   const cardElement = element.generateCard();
   elements.prepend(cardElement);

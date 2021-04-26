@@ -1,6 +1,17 @@
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
 
+// forms validation
+
+const formValidationSettings = {
+  formSelector: '.form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__submit-btn',
+  inactiveButtonClass: 'form__submit-btn_disabled',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__error_active'
+};
+
 // variables
 
 const editModal = document.querySelector('.modal_type_edit');
@@ -18,10 +29,16 @@ const editForm = document.querySelector(".edit-form");
 const editFormInputName = editForm.querySelector(".form__item_el_name");
 const editFormInputBio = editForm.querySelector(".form__item_el_bio");
 
+const editFormValidator = new FormValidator(formValidationSettings, editForm);
+editFormValidator.enableValidation();
+
 const addForm = document.querySelector(".add-form");
 const addFormInputName = addForm.querySelector(".form__item_el_name");
 const addFormInputLink = addForm.querySelector(".form__item_el_link");
 const addFormSubmitButton = addForm.querySelector(".form__submit-btn");
+
+const addFormValidator = new FormValidator(formValidationSettings, addForm);
+addFormValidator.enableValidation();
 
 // functions
 
@@ -127,24 +144,4 @@ initialCards.forEach((item) => {
   const element = new Card(item, Card.selectors.template);
   const cardElement = element.generateCard();
   document.querySelector(Card.selectors.elements).append(cardElement);
-});
-
-// forms validation
-
-const formValidationSettings = {
-  formSelector: '.form',
-  inputSelector: '.form__item',
-  submitButtonSelector: '.form__submit-btn',
-  inactiveButtonClass: 'form__submit-btn_disabled',
-  inputErrorClass: 'form__item_type_error',
-  errorClass: 'form__error_active'
-}; 
-
-// save all document forms as an array
-const formList = Array.from(document.querySelectorAll(formValidationSettings.formSelector));
-
-// enable validation for each document form
-formList.forEach((form) => {
-  const element = new FormValidator(formValidationSettings, form);
-  const newElement = element.enableValidation();
 });

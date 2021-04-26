@@ -17,7 +17,6 @@ const formValidationSettings = {
 
 const editModal = document.querySelector('.modal_type_edit');
 const addModal = document.querySelector('.modal_type_add');
-//const openedModal = document.querySelector('.modal_opened');
 
 const profile = document.querySelector(".profile");
 const openEditModalBtn = profile.querySelector(".profile__edit-btn");
@@ -82,9 +81,7 @@ const editFormSubmitHandler = ((evt) => {
 const addFormSubmitHandler = ((evt) => {
   evt.preventDefault();
   // add a new element to elements
-  const element = new Card({name: addFormInputName.value, link: addFormInputLink.value, alt: `Изображение ${addFormInputName.value}`}, '#element-template');
-  const cardElement = element.generateCard();
-  elements.prepend(cardElement);
+  createCard({name: addFormInputName.value, link: addFormInputLink.value, alt: `Изображение ${addFormInputName.value}`}, '#element-template');
 
   addForm.reset();
   disableFormSubmitButton(addFormSubmitButton);
@@ -94,6 +91,12 @@ const addFormSubmitHandler = ((evt) => {
 const disableFormSubmitButton = (button) => {
   button.classList.add("form__submit-btn_disabled");
   button.setAttribute("disabled", true);
+}
+
+const createCard = function(data, cardSelector) {
+  const element = new Card(data, cardSelector);
+  const cardElement = element.generateCard();
+  elements.prepend(cardElement);
 }
 
 // event listeners
@@ -112,7 +115,5 @@ openAddModalBtn.addEventListener ("click", () => openModal(addModal));
 // when page opens, there should be 6 elements added by JavaScript
 
 initialCards.forEach((item) => {
-  const element = new Card(item, Card.selectors.template);
-  const cardElement = element.generateCard();
-  document.querySelector(Card.selectors.elements).append(cardElement);
+  createCard(item, Card.selectors.template);
 });

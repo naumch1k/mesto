@@ -1,14 +1,13 @@
 export class FormValidator {
 
   constructor(data, element) {
-      this._data = data;
-      this._element = element;
-
-      this._inputList = Array.from(this._element.querySelectorAll(this._data.inputSelector));
-
-      this._submitButton = this._element.querySelector(this._data.submitButtonSelector);
+    this._data = data;
+    this._element = element;
+    this._inputList = Array.from(this._element.querySelectorAll(this._data.inputSelector));
+    this._submitButton = this._element.querySelector(this._data.submitButtonSelector);
   }
 
+  // set input listener to all of the form inputs
   _setEventListeners() {
     this._inputList.forEach(input =>
       input.addEventListener('input', () => this._validationHandler(input))
@@ -31,7 +30,7 @@ export class FormValidator {
   // add error class
   _showInputError = (input, errorMessage) => {
     const error = this._element.querySelector(`#${input.id}-error`);
-    
+
     input.classList.add(this._data.inputErrorClass);
     error.classList.add(this._data.errorClass);
     error.textContent = errorMessage;
@@ -47,7 +46,6 @@ export class FormValidator {
   };
 
   // check all form inputs to prevent submission if any of those is invalid
-
   _hasInvalidInput = inputList => inputList.some(input => !input.validity.valid)
 
   // enable/disable form submit button

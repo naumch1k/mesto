@@ -1,4 +1,5 @@
 import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
 
 // variables
 
@@ -87,7 +88,6 @@ openEditModalBtn.addEventListener ('click', function () {
 
 openAddModalBtn.addEventListener ("click", () => openModal(addModal));
 
-
 // when page opens, there should be 6 elements added by JavaScript
 
 const initialCards = [
@@ -127,4 +127,24 @@ initialCards.forEach((item) => {
   const element = new Card(item, Card.selectors.template);
   const cardElement = element.generateCard();
   document.querySelector(Card.selectors.elements).append(cardElement);
+});
+
+// forms validation
+
+const formValidationSettings = {
+  formSelector: '.form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__submit-btn',
+  inactiveButtonClass: 'form__submit-btn_disabled',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__error_active'
+}; 
+
+// save all document forms as an array
+const formList = Array.from(document.querySelectorAll(formValidationSettings.formSelector));
+
+// enable validation for each document form
+formList.forEach((form) => {
+  const element = new FormValidator(formValidationSettings, form);
+  const newElement = element.enableValidation();
 });

@@ -1,6 +1,18 @@
 import {Card} from './Card.js';
 import {initialCards} from './initial-сards.js';
 import {openModal, closeModal} from './modal.js';
+import {FormValidator} from './FormValidator.js';
+
+// form validation settings
+
+const formValidationSettings = {
+  formSelector: '.form',
+  inputSelector: '.form__item',
+  submitButtonSelector: '.form__submit-btn',
+  inactiveButtonClass: 'form__submit-btn_disabled',
+  inputErrorClass: 'form__item_type_error',
+  errorClass: 'form__error_active'
+};
 
 // variables
 
@@ -19,10 +31,17 @@ const editForm = document.querySelector(".edit-form");
 const editFormInputName = editForm.querySelector(".form__item_el_name");
 const editFormInputBio = editForm.querySelector(".form__item_el_bio");
 
+const editFormValidator = new FormValidator(formValidationSettings, editForm);
+editFormValidator.enableValidation();
+
+
 const addForm = document.querySelector(".add-form");
 const addFormInputName = addForm.querySelector(".form__item_el_name");
 const addFormInputLink = addForm.querySelector(".form__item_el_link");
 const addFormSubmitButton = addForm.querySelector(".form__submit-btn");
+
+const addFormValidator = new FormValidator(formValidationSettings, addForm);
+addFormValidator.enableValidation();
 
 // functions
 
@@ -63,9 +82,14 @@ openEditModalBtn.addEventListener ('click', function () {
   openModal(editModal);
   editFormInputName.value = profileName.textContent;
   editFormInputBio.value = profileBio.textContent;
+  editFormValidator.setInitialState();
 });
 
-openAddModalBtn.addEventListener ("click", () => openModal(addModal));
+openAddModalBtn.addEventListener ("click", function () {
+  openModal(addModal);
+  addForm.reset();
+  addFormValidator.setInitialState();
+});
 
 // when page opens, there should be 6 elements added by JavaScript
 

@@ -36,7 +36,8 @@ const editFormSubmitHandler = ((evt) => {
 const addFormSubmitHandler = ((evt) => {
   evt.preventDefault();
   // add a new element to elements
-  createCard({name: addFormInputName.value, link: addFormInputLink.value, alt: `Изображение ${addFormInputName.value}`}, '#element-template');
+  const cardElement = createCard({name: addFormInputName.value, link: addFormInputLink.value, alt: `Изображение ${addFormInputName.value}`}, '#element-template');
+  elements.prepend(cardElement);
 
   disableFormSubmitButton(addFormSubmitButton);
   closeModal(addModal);
@@ -50,7 +51,7 @@ const disableFormSubmitButton = (button) => {
 const createCard = (data, cardSelector) => {
   const element = new Card(data, cardSelector);
   const cardElement = element.generateCard();
-  elements.prepend(cardElement);
+  return cardElement;
 }
 
 // event listeners
@@ -69,5 +70,6 @@ openAddModalBtn.addEventListener ("click", () => openModal(addModal));
 // when page opens, there should be 6 elements added by JavaScript
 
 initialCards.forEach((item) => {
-  createCard(item, Card.selectors.template);
+  const cardElement = createCard(item, Card.selectors.template);
+  elements.append(cardElement);
 });

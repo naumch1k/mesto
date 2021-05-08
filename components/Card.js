@@ -1,4 +1,4 @@
-import {openModal} from './modal.js';
+import {openModal} from '../components/modal.js';
 
 const imageModal = document.querySelector('.modal_type_image');
 const imageModalImage = imageModal.querySelector('.modal__image');

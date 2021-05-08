@@ -1,7 +1,11 @@
-import {Card} from './Card.js';
-import {initialCards} from './initial-сards.js';
-import {openModal, closeModal} from './modal.js';
-import {FormValidator} from './FormValidator.js';
+import {Card} from '../components/Card.js';
+import {openModal, closeModal} from '../components/modal.js';
+import {FormValidator} from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import {initialCards} from '../utils/initial-сards.js';
+import {
+  cardListSelector
+} from '../utils/constants.js';
 
 // form validation settings
 
@@ -93,7 +97,12 @@ openAddModalBtn.addEventListener ("click", function () {
 
 // when page opens, there should be 6 elements added by JavaScript
 
-initialCards.forEach((item) => {
-  const cardElement = createCard(item, Card.selectors.template);
-  elements.append(cardElement);
-});
+const cardList = new Section ({
+  items: initialCards,
+  renderer: (item) => {
+    const cardElement = createCard(item, Card.selectors.template);
+    cardList.addItem(cardElement);
+  }
+}, cardListSelector)
+
+cardList.renderItems();

@@ -10,7 +10,7 @@ export default class Modal {
     this._modal.addEventListener('click', (evt) => this._handleOverlayClose(evt));
   }
 
-  closeModal = () => {
+  closeModal () {
     this._modal.classList.remove("modal_opened");
     document.removeEventListener('keydown', this._handleEscClose);
     this._modal.removeEventListener('click', this._handleOverlayClose);

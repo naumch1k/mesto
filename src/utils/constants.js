@@ -11,9 +11,6 @@ export const editFormInputName = editForm.querySelector(".form__item_el_name");
 export const editFormInputBio = editForm.querySelector(".form__item_el_bio");
 export const elements = document.querySelector('.elements__list');
 
-
-
-
 export const formValidationSettings = {
   formSelector: '.form',
   inputSelector: '.form__item',

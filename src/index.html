@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="./pages/index.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mesto</title>
 </head>
@@ -11,11 +10,11 @@
 <body class="page">
   <div class="page__container">
     <header class="header page__header">
-      <img src="./images/header-logo.svg" class="header__logo" alt="Логотип сервиса Mesto Russia">
+      <img src="<%=require('./images/header-logo.svg')%>" class="header__logo" alt="Логотип сервиса Mesto Russia">
     </header>
     <main class="content page__content">
       <section class="profile content__section">
-        <img class="profile__avatar" src="./images/avatar-2.jpg" alt="Логотип профиля">
+        <img class="profile__avatar" src="<%=require('./images/avatar-2.jpg')%>" alt="Логотип профиля">
         <div class="profile__info">
           <h1 class="profile__name">Ирусик</h1>
           <p class="profile__bio">Водитель-дальнобойщик в США</p>
@@ -81,6 +80,5 @@
       <button class="element__delete-btn" type="button" aria-label="Удалить фотографию"></button>
     </li>
   </template>
-  <script type="module" src="./pages/index.js"></script>
 </body>
 </html>

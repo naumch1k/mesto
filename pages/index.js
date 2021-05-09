@@ -1,5 +1,6 @@
 import {Card} from '../components/Card.js';
-import {openModal, closeModal} from '../components/modal.js';
+import Modal from '../components/Modal.js';
+import ModalWithImage from '../components/ModalWithImage.js';
 import {FormValidator} from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import {initialCards} from '../utils/initial-сards.js';
@@ -22,6 +23,7 @@ const formValidationSettings = {
 
 const editModal = document.querySelector('.modal_type_edit');
 const addModal = document.querySelector('.modal_type_add');
+
 
 const profile = document.querySelector(".profile");
 const openEditModalBtn = profile.querySelector(".profile__edit-btn");
@@ -47,6 +49,10 @@ const addFormSubmitButton = addForm.querySelector(".form__submit-btn");
 const addFormValidator = new FormValidator(formValidationSettings, addForm);
 addFormValidator.enableValidation();
 
+
+const imageModal = new ModalWithImage('.modal_type_image');
+imageModal.setEventListeners();
+
 // functions
 
 const editFormSubmitHandler = ((evt) => {
@@ -71,8 +77,12 @@ const disableFormSubmitButton = (button) => {
   button.setAttribute("disabled", true);
 }
 
+function cardImageClickHandler(name, link, alt = `Изображение ${name}`) {
+  imageModal.openModal(name, link, alt);
+}
+
 const createCard = (data, cardSelector) => {
-  const element = new Card(data, cardSelector);
+  const element = new Card(data, cardSelector, cardImageClickHandler);
   const cardElement = element.generateCard();
   return cardElement;
 }

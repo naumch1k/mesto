@@ -1,4 +1,4 @@
-import {openModal} from '../components/modal.js';
+import Modal from './Modal.js';
 
 const imageModal = document.querySelector('.modal_type_image');
 const imageModalImage = imageModal.querySelector('.modal__image');
@@ -17,11 +17,13 @@ export class Card {
     likeButtonActive: "element__like-btn_active"
   }
 
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._alt = data.alt;
+
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate () {
@@ -38,17 +40,14 @@ export class Card {
     this._element.querySelector(Card.selectors.likeButton).classList.toggle(Card.selectors.likeButtonActive);
   }
 
-  _handleImageClick() {
-    imageModalImage.src = this._link;
-    imageModalCaption.textContent = this._name;
-    imageModalImage.alt = this._alt;
-    openModal(imageModal);
+  _handleCardClick(name, link) {
+    imageModal.openModal(name, link, alt);
   }
 
   _setEventListeners() {
     this._element.querySelector(Card.selectors.deleteButton).addEventListener('click', () => this._element.remove());
     this._element.querySelector(Card.selectors.likeButton).addEventListener('click', () => this._handleLike());
-    this._element.querySelector(Card.selectors.elementImage).addEventListener('click', () => this._handleImageClick());
+    this._element.querySelector(Card.selectors.elementImage).addEventListener('click', () => this._handleCardClick(this._name, this._link, this._alt));
   }
 
   generateCard() {

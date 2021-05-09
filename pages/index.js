@@ -3,6 +3,7 @@ import ModalWithForm from '../components/ModalWithForm.js';
 import ModalWithImage from '../components/ModalWithImage.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
 import {initialCards} from '../utils/initial-сards.js';
 import {
   cardListSelector
@@ -24,14 +25,11 @@ const formValidationSettings = {
 const profile = document.querySelector(".profile");
 const openEditModalBtn = profile.querySelector(".profile__edit-btn");
 const openAddModalBtn = profile.querySelector(".profile__add-btn");
-const profileName = profile.querySelector(".profile__name");
-const profileBio = profile.querySelector(".profile__bio");
 
-const elements = document.querySelector('.elements__list');
+
+//const elements = document.querySelector('.elements__list');
 
 const editForm = document.querySelector(".edit-form");
-const editFormInputName = editForm.querySelector(".form__item_el_name");
-const editFormInputBio = editForm.querySelector(".form__item_el_bio");
 
 const editFormValidator = new FormValidator(formValidationSettings, editForm);
 editFormValidator.enableValidation();
@@ -43,16 +41,21 @@ const addFormSubmitButton = addForm.querySelector(".form__submit-btn");
 const addFormValidator = new FormValidator(formValidationSettings, addForm);
 addFormValidator.enableValidation();
 
+const userNameSelector = ".profile__name";
+const userBioSelector = ".profile__bio";
+const editFormInputName = editForm.querySelector(".form__item_el_name");
+const editFormInputBio = editForm.querySelector(".form__item_el_bio");
+
 // functions
 
-const editFormSubmitHandler = (() => {
-  profileName.textContent = editFormInputName.value;
-  profileBio.textContent = editFormInputBio.value;
-
+const editFormSubmitHandler = ((data) => {
+  const userInfo = new UserInfo({ userNameSelector, userBioSelector });
+  userInfo.setUserInfo(data);
   editModal.closeModal();
 });
 
 const addFormSubmitHandler = ((data) => {
+  
   // add a new element to elements
   const cardElement = createCard(data, '#element-template');
   elements.prepend(cardElement);
@@ -87,9 +90,11 @@ addModal.setEventListeners();
 imageModal.setEventListeners();
 
 openEditModalBtn.addEventListener ('click', function () {
+  const userInfo = new UserInfo({ userNameSelector, userBioSelector });
+  const userData = userInfo.getUserInfo();
+  editFormInputName.value = userData.name;
+  editFormInputBio.value = userData.bio;
   editModal.openModal();
-  editFormInputName.value = profileName.textContent;
-  editFormInputBio.value = profileBio.textContent;
   editFormValidator.setInitialState();
 });
 

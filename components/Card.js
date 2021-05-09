@@ -1,10 +1,6 @@
-import Modal from './Modal.js';
-
 const imageModal = document.querySelector('.modal_type_image');
-const imageModalImage = imageModal.querySelector('.modal__image');
-const imageModalCaption = imageModal.querySelector('.modal__image-caption');
 
-export class Card {
+export default class Card {
 
   static selectors = {
     template: "#element-template",
@@ -63,4 +59,3 @@ export class Card {
     return this._element;
   }
 }
-

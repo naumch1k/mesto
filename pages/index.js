@@ -1,7 +1,7 @@
-import {Card} from '../components/Card.js';
+import Card from '../components/Card.js';
 import ModalWithForm from '../components/ModalWithForm.js';
 import ModalWithImage from '../components/ModalWithImage.js';
-import {FormValidator} from '../components/FormValidator.js';
+import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import {initialCards} from '../utils/initial-сards.js';
 import {
@@ -38,15 +38,10 @@ editFormValidator.enableValidation();
 
 
 const addForm = document.querySelector(".add-form");
-const addFormInputName = addForm.querySelector(".form__item_el_name");
-const addFormInputLink = addForm.querySelector(".form__item_el_link");
 const addFormSubmitButton = addForm.querySelector(".form__submit-btn");
 
 const addFormValidator = new FormValidator(formValidationSettings, addForm);
 addFormValidator.enableValidation();
-
-const imageModal = new ModalWithImage('.modal_type_image');
-imageModal.setEventListeners();
 
 // functions
 
@@ -57,31 +52,26 @@ const editFormSubmitHandler = (() => {
   editModal.closeModal();
 });
 
-const addFormSubmitHandler = (() => {
+const addFormSubmitHandler = ((data) => {
   // add a new element to elements
-  const cardElement = createCard({name: addFormInputName.value, link: addFormInputLink.value, alt: `Изображение ${addFormInputName.value}`}, '#element-template');
+  const cardElement = createCard(data, '#element-template');
   elements.prepend(cardElement);
 
   disableFormSubmitButton(addFormSubmitButton);
   addModal.closeModal();
 });
 
+function cardImageClickHandler(name, link, alt = `Изображение ${name}`) {
+  imageModal.openModal(name, link, alt);
+}
 
 const editModal = new ModalWithForm('.modal_type_edit', editFormSubmitHandler);
-editModal.setEventListeners();
-
-
 const addModal = new ModalWithForm('.modal_type_add', addFormSubmitHandler);
-addModal.setEventListeners();
-
+const imageModal = new ModalWithImage('.modal_type_image');
 
 const disableFormSubmitButton = (button) => {
   button.classList.add("form__submit-btn_disabled");
   button.setAttribute("disabled", true);
-}
-
-function cardImageClickHandler(name, link, alt = `Изображение ${name}`) {
-  imageModal.openModal(name, link, alt);
 }
 
 const createCard = (data, cardSelector) => {
@@ -91,6 +81,10 @@ const createCard = (data, cardSelector) => {
 }
 
 // event listeners
+
+editModal.setEventListeners();
+addModal.setEventListeners();
+imageModal.setEventListeners();
 
 openEditModalBtn.addEventListener ('click', function () {
   editModal.openModal();

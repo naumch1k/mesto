@@ -6,57 +6,39 @@ import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import {initialCards} from '../utils/initial-сards.js';
 import {
-  cardListSelector
+  cardListSelector,
+  openEditModalBtn,
+  openAddModalBtn,
+  editForm,
+  addForm,
+  addFormSubmitButton,
+  formValidationSettings,
+  userNameSelector,
+  userBioSelector,
+  editFormInputName,
+  editFormInputBio,
+  elements
 } from '../utils/constants.js';
 
-// form validation settings
-
-const formValidationSettings = {
-  formSelector: '.form',
-  inputSelector: '.form__item',
-  submitButtonSelector: '.form__submit-btn',
-  inactiveButtonClass: 'form__submit-btn_disabled',
-  inputErrorClass: 'form__item_type_error',
-  errorClass: 'form__error_active'
-};
-
-// variables
-
-const profile = document.querySelector(".profile");
-const openEditModalBtn = profile.querySelector(".profile__edit-btn");
-const openAddModalBtn = profile.querySelector(".profile__add-btn");
-
-
-//const elements = document.querySelector('.elements__list');
-
-const editForm = document.querySelector(".edit-form");
+// edit profile
 
 const editFormValidator = new FormValidator(formValidationSettings, editForm);
-editFormValidator.enableValidation();
-
-
-const addForm = document.querySelector(".add-form");
-const addFormSubmitButton = addForm.querySelector(".form__submit-btn");
-
-const addFormValidator = new FormValidator(formValidationSettings, addForm);
-addFormValidator.enableValidation();
-
-const userNameSelector = ".profile__name";
-const userBioSelector = ".profile__bio";
-const editFormInputName = editForm.querySelector(".form__item_el_name");
-const editFormInputBio = editForm.querySelector(".form__item_el_bio");
-
-// functions
 
 const editFormSubmitHandler = ((data) => {
+
   const userInfo = new UserInfo({ userNameSelector, userBioSelector });
   userInfo.setUserInfo(data);
   editModal.closeModal();
 });
 
+const editModal = new ModalWithForm('.modal_type_edit', editFormSubmitHandler);
+
+// add card
+
+const addFormValidator = new FormValidator(formValidationSettings, addForm);
+
 const addFormSubmitHandler = ((data) => {
   
-  // add a new element to elements
   const cardElement = createCard(data, '#element-template');
   elements.prepend(cardElement);
 
@@ -64,26 +46,33 @@ const addFormSubmitHandler = ((data) => {
   addModal.closeModal();
 });
 
-function cardImageClickHandler(name, link, alt = `Изображение ${name}`) {
-  imageModal.openModal(name, link, alt);
-}
-
-const editModal = new ModalWithForm('.modal_type_edit', editFormSubmitHandler);
-const addModal = new ModalWithForm('.modal_type_add', addFormSubmitHandler);
-const imageModal = new ModalWithImage('.modal_type_image');
-
-const disableFormSubmitButton = (button) => {
-  button.classList.add("form__submit-btn_disabled");
-  button.setAttribute("disabled", true);
-}
-
 const createCard = (data, cardSelector) => {
   const element = new Card(data, cardSelector, cardImageClickHandler);
   const cardElement = element.generateCard();
   return cardElement;
 }
 
-// event listeners
+const disableFormSubmitButton = (button) => {
+  button.classList.add("form__submit-btn_disabled");
+  button.setAttribute("disabled", true);
+}
+
+const addModal = new ModalWithForm('.modal_type_add', addFormSubmitHandler);
+
+// view card image
+
+function cardImageClickHandler(name, link, alt = `Изображение ${name}`) {
+  imageModal.openModal(name, link, alt);
+}
+
+const imageModal = new ModalWithImage('.modal_type_image');
+
+// enable form validation
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
+
+// set event listeners
 
 editModal.setEventListeners();
 addModal.setEventListeners();
@@ -103,7 +92,7 @@ openAddModalBtn.addEventListener ("click", function () {
   addFormValidator.setInitialState();
 });
 
-// when page opens, there should be 6 elements added by JavaScript
+// open page with 6 initial cards added by JavaScript
 
 const cardList = new Section ({
   items: initialCards,

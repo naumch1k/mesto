@@ -7,3 +7,7 @@ module.exports = {
     cssnano({ preset: 'default' })
   ]
 }; 
+
+var ghpages = require('gh-pages');
+
+ghpages.publish('dist', function(err) {});

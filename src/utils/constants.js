@@ -28,6 +28,5 @@ export const profileSelector = ".profile";
 export const openEditPopupButtonSelector = ".profile__edit-btn";
 export const openAddPopupButtonSelector = ".profile__add-btn";
 export const formSubmitButtonSelector = ".form__submit-btn";
-export const disabledFormSubmitButtonClass = "form__submit-btn_disabled";
 export const editFormInputNameSelector = ".form__item_el_name";
 export const editFormInputBioSelector = ".form__item_el_bio";

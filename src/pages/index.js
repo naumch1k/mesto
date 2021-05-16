@@ -17,7 +17,6 @@ import {
   openEditPopupButtonSelector,
   openAddPopupButtonSelector,
   formSubmitButtonSelector,
-  disabledFormSubmitButtonClass,
   editFormInputNameSelector,
   editFormInputBioSelector
 } from '../utils/constants.js';
@@ -27,7 +26,6 @@ import {
 const profile = document.querySelector(profileSelector);
 const openEditPopupBtn = profile.querySelector(openEditPopupButtonSelector);
 const openAddPopupBtn = profile.querySelector(openAddPopupButtonSelector);
-const elements = document.querySelector(elementsListSelector);
 const editForm = document.querySelector(formSelectors.editFormSelector);
 const editFormInputName = editForm.querySelector(editFormInputNameSelector);
 const editFormInputBio = editForm.querySelector(editFormInputBioSelector);
@@ -50,25 +48,25 @@ const editPopup = new PopupWithForm(popupSelectors.editPopupSelector, editFormSu
 
 const addFormValidator = new FormValidator(formValidationSettings, addForm);
 
-const addFormSubmitHandler = ((data) => {
-  
-  const cardElement = createCard(data, '#element-template');
-  elements.prepend(cardElement);
-
-  disableFormSubmitButton(addFormSubmitButton);
-  addPopup.closePopup();
-});
-
 const createCard = (data, cardSelector) => {
   const element = new Card(data, cardSelector, cardImageClickHandler);
   const cardElement = element.generateCard();
   return cardElement;
 }
 
-const disableFormSubmitButton = (button) => {
-  button.classList.add(disabledFormSubmitButtonClass);
-  button.setAttribute("disabled", true);
-}
+const cardList = new Section ({
+  items: initialCards,
+  renderer: (item) => {
+    const cardElement = createCard(item, Card.selectors.template);
+    cardList.addItem(cardElement);
+  }
+}, elementsListSelector)
+
+const addFormSubmitHandler = ((data) => {
+  const cardElement = createCard(data, '#element-template');
+  cardList.addItem(cardElement);
+  addPopup.closePopup();
+});
 
 const addPopup = new PopupWithForm(popupSelectors.addPopupSelector, addFormSubmitHandler);
 
@@ -104,14 +102,6 @@ openAddPopupBtn.addEventListener ("click", function () {
   addFormValidator.setInitialState();
 });
 
-// open page with 6 initial cards added by JavaScript
-
-const cardList = new Section ({
-  items: initialCards,
-  renderer: (item) => {
-    const cardElement = createCard(item, Card.selectors.template);
-    cardList.addItem(cardElement);
-  }
-}, elementsListSelector)
+// load initial cards
 
 cardList.renderItems();

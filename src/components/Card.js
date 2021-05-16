@@ -5,7 +5,7 @@ export default class Card {
 
   static selectors = {
     template: "#element-template",
-    elements: ".elements__list",
+    //elements: ".elements__list",
     element: ".element",
     elementImage: ".element__image",
     elementTitle: ".element__title",
@@ -23,7 +23,7 @@ export default class Card {
     this._handleCardClick = handleCardClick;
   }
 
-  _getTemplate () {
+  _getTemplate() {
     const newElement = document
     .querySelector(this._cardSelector)
     .content

@@ -4,7 +4,7 @@ export default class UserInfo {
     this._bio = document.querySelector(userData.userBioSelector);
   }
 
-  getUserInfo () {
+  getUserInfo() {
     const userInfo = {
       name: this._name.textContent,
       bio: this._bio.textContent

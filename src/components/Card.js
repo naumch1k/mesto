@@ -1,4 +1,5 @@
-const imageModal = document.querySelector('.modal_type_image');
+import {popupSelectors} from '../utils/constants.js';
+const imageModal = document.querySelector(popupSelectors.imagePopupSelector);
 
 export default class Card {
 

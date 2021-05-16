@@ -1,15 +1,21 @@
-import Modal from './Modal.js';
+import Popup from './Popup.js';
 
-export default class ModalWithForm extends Modal {
+export default class PopupWithForm extends Popup {
+
+  static selectors = {
+    form: ".form",
+    formItem: ".form__item"
+  }
+
   constructor(modalSelector, submitHandler) {
     super(modalSelector);
     this._submitHandler = submitHandler;
 
-    this._form = this._modal.querySelector(".form");
+    this._form = this._modal.querySelector(PopupWithForm.selectors.form);
   }
 
   _getInputValues() {
-    this._inputList = this._form.querySelectorAll('.form__item');
+    this._inputList = this._form.querySelectorAll(PopupWithForm.selectors.formItem);
     this._formValues = {};
 
     this._inputList.forEach(input => {

@@ -1,38 +1,50 @@
 import './index.css';
 import Card from '../components/Card.js';
-import ModalWithForm from '../components/ModalWithForm.js';
-import ModalWithImage from '../components/ModalWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import {initialCards} from '../utils/initial-сards.js';
+
 import {
-  cardListSelector,
-  openEditModalBtn,
-  openAddModalBtn,
-  editForm,
-  addForm,
-  addFormSubmitButton,
+  userData,
   formValidationSettings,
-  userNameSelector,
-  userBioSelector,
-  editFormInputName,
-  editFormInputBio,
-  elements
+  popupSelectors,
+  formSelectors,
+  elementsListSelector,
+  profileSelector,
+  openEditModalButtonSelector,
+  openAddModalButtonSelector,
+  formSubmitButtonSelector,
+  disabledFormSubmitButtonClass,
+  editFormInputNameSelector,
+  editFormInputBioSelector
 } from '../utils/constants.js';
+
+// variables
+
+const profile = document.querySelector(profileSelector);
+const openEditModalBtn = profile.querySelector(openEditModalButtonSelector);
+const openAddModalBtn = profile.querySelector(openAddModalButtonSelector);
+const elements = document.querySelector(elementsListSelector);
+const editForm = document.querySelector(formSelectors.editFormSelector);
+const editFormInputName = editForm.querySelector(editFormInputNameSelector);
+const editFormInputBio = editForm.querySelector(editFormInputBioSelector);
+const addForm = document.querySelector(formSelectors.addFormSelector);
+const addFormSubmitButton = addForm.querySelector(formSubmitButtonSelector);
 
 // edit profile
 
 const editFormValidator = new FormValidator(formValidationSettings, editForm);
+const userInfo = new UserInfo(userData);
 
 const editFormSubmitHandler = ((data) => {
-
-  const userInfo = new UserInfo({ userNameSelector, userBioSelector });
   userInfo.setUserInfo(data);
   editModal.closeModal();
 });
 
-const editModal = new ModalWithForm('.modal_type_edit', editFormSubmitHandler);
+const editModal = new PopupWithForm(popupSelectors.editPopupSelector, editFormSubmitHandler);
 
 // add card
 
@@ -54,11 +66,11 @@ const createCard = (data, cardSelector) => {
 }
 
 const disableFormSubmitButton = (button) => {
-  button.classList.add("form__submit-btn_disabled");
+  button.classList.add(disabledFormSubmitButtonClass);
   button.setAttribute("disabled", true);
 }
 
-const addModal = new ModalWithForm('.modal_type_add', addFormSubmitHandler);
+const addModal = new PopupWithForm(popupSelectors.addPopupSelector, addFormSubmitHandler);
 
 // view card image
 
@@ -66,7 +78,7 @@ function cardImageClickHandler(name, link, alt = `Изображение ${name}
   imageModal.openModal(name, link, alt);
 }
 
-const imageModal = new ModalWithImage('.modal_type_image');
+const imageModal = new PopupWithImage(popupSelectors.imagePopupSelector);
 
 // enable form validation
 
@@ -80,7 +92,6 @@ addModal.setEventListeners();
 imageModal.setEventListeners();
 
 openEditModalBtn.addEventListener ('click', function () {
-  const userInfo = new UserInfo({ userNameSelector, userBioSelector });
   const userData = userInfo.getUserInfo();
   editFormInputName.value = userData.name;
   editFormInputBio.value = userData.bio;
@@ -101,6 +112,6 @@ const cardList = new Section ({
     const cardElement = createCard(item, Card.selectors.template);
     cardList.addItem(cardElement);
   }
-}, cardListSelector)
+}, elementsListSelector)
 
 cardList.renderItems();

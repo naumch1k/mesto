@@ -1,5 +1,5 @@
 import {popupSelectors} from '../utils/constants.js';
-const imageModal = document.querySelector(popupSelectors.imagePopupSelector);
+const imagePopup = document.querySelector(popupSelectors.imagePopupSelector);
 
 export default class Card {
 
@@ -38,7 +38,7 @@ export default class Card {
   }
 
   _handleCardClick(name, link) {
-    imageModal.openModal(name, link, alt);
+    imagePopup.openPopup(name, link, alt);
   }
 
   _setEventListeners() {

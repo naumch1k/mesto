@@ -14,8 +14,8 @@ import {
   formSelectors,
   elementsListSelector,
   profileSelector,
-  openEditModalButtonSelector,
-  openAddModalButtonSelector,
+  openEditPopupButtonSelector,
+  openAddPopupButtonSelector,
   formSubmitButtonSelector,
   disabledFormSubmitButtonClass,
   editFormInputNameSelector,
@@ -25,8 +25,8 @@ import {
 // variables
 
 const profile = document.querySelector(profileSelector);
-const openEditModalBtn = profile.querySelector(openEditModalButtonSelector);
-const openAddModalBtn = profile.querySelector(openAddModalButtonSelector);
+const openEditPopupBtn = profile.querySelector(openEditPopupButtonSelector);
+const openAddPopupBtn = profile.querySelector(openAddPopupButtonSelector);
 const elements = document.querySelector(elementsListSelector);
 const editForm = document.querySelector(formSelectors.editFormSelector);
 const editFormInputName = editForm.querySelector(editFormInputNameSelector);
@@ -41,10 +41,10 @@ const userInfo = new UserInfo(userData);
 
 const editFormSubmitHandler = ((data) => {
   userInfo.setUserInfo(data);
-  editModal.closeModal();
+  editPopup.closePopup();
 });
 
-const editModal = new PopupWithForm(popupSelectors.editPopupSelector, editFormSubmitHandler);
+const editPopup = new PopupWithForm(popupSelectors.editPopupSelector, editFormSubmitHandler);
 
 // add card
 
@@ -56,7 +56,7 @@ const addFormSubmitHandler = ((data) => {
   elements.prepend(cardElement);
 
   disableFormSubmitButton(addFormSubmitButton);
-  addModal.closeModal();
+  addPopup.closePopup();
 });
 
 const createCard = (data, cardSelector) => {
@@ -70,15 +70,15 @@ const disableFormSubmitButton = (button) => {
   button.setAttribute("disabled", true);
 }
 
-const addModal = new PopupWithForm(popupSelectors.addPopupSelector, addFormSubmitHandler);
+const addPopup = new PopupWithForm(popupSelectors.addPopupSelector, addFormSubmitHandler);
 
 // view card image
 
 function cardImageClickHandler(name, link, alt = `Изображение ${name}`) {
-  imageModal.openModal(name, link, alt);
+  imagePopup.openPopup(name, link, alt);
 }
 
-const imageModal = new PopupWithImage(popupSelectors.imagePopupSelector);
+const imagePopup = new PopupWithImage(popupSelectors.imagePopupSelector);
 
 // enable form validation
 
@@ -87,20 +87,20 @@ addFormValidator.enableValidation();
 
 // set event listeners
 
-editModal.setEventListeners();
-addModal.setEventListeners();
-imageModal.setEventListeners();
+editPopup.setEventListeners();
+addPopup.setEventListeners();
+imagePopup.setEventListeners();
 
-openEditModalBtn.addEventListener ('click', function () {
+openEditPopupBtn.addEventListener ('click', function () {
   const userData = userInfo.getUserInfo();
   editFormInputName.value = userData.name;
   editFormInputBio.value = userData.bio;
-  editModal.openModal();
+  editPopup.openPopup();
   editFormValidator.setInitialState();
 });
 
-openAddModalBtn.addEventListener ("click", function () {
-  addModal.openModal();
+openAddPopupBtn.addEventListener ("click", function () {
+  addPopup.openPopup();
   addFormValidator.setInitialState();
 });
 

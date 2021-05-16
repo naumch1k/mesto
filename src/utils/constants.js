@@ -13,9 +13,9 @@ export const userData = {
 }
 
 export const popupSelectors = {
-  editPopupSelector: ".modal_type_edit",
-  addPopupSelector: ".modal_type_add",
-  imagePopupSelector: ".modal_type_image"
+  editPopupSelector: ".popup_type_edit",
+  addPopupSelector: ".popup_type_add",
+  imagePopupSelector: ".popup_type_image"
 }
 
 export const formSelectors = {
@@ -25,8 +25,8 @@ export const formSelectors = {
 
 export const elementsListSelector = '.elements__list';
 export const profileSelector = ".profile";
-export const openEditModalButtonSelector = ".profile__edit-btn";
-export const openAddModalButtonSelector = ".profile__add-btn";
+export const openEditPopupButtonSelector = ".profile__edit-btn";
+export const openAddPopupButtonSelector = ".profile__add-btn";
 export const formSubmitButtonSelector = ".form__submit-btn";
 export const disabledFormSubmitButtonClass = "form__submit-btn_disabled";
 export const editFormInputNameSelector = ".form__item_el_name";

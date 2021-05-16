@@ -7,11 +7,11 @@ export default class PopupWithForm extends Popup {
     formItem: ".form__item"
   }
 
-  constructor(modalSelector, submitHandler) {
-    super(modalSelector);
+  constructor(popupSelector, submitHandler) {
+    super(popupSelector);
     this._submitHandler = submitHandler;
 
-    this._form = this._modal.querySelector(PopupWithForm.selectors.form);
+    this._form = this._popup.querySelector(PopupWithForm.selectors.form);
   }
 
   _getInputValues() {
@@ -34,8 +34,8 @@ export default class PopupWithForm extends Popup {
     });
   }
 
-  closeModal() {
-    super.closeModal();
+  closePopup() {
+    super.closePopup();
     this._form.reset();
   }
 }

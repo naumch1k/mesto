@@ -1,40 +1,40 @@
 export default class Popup {
 
   static selectors = {
-    popupCloseButton: ".modal__close-btn",
-    popupClass: "modal",
-    popupOpened: "modal_opened"
+    popupCloseButton: ".popup__close-btn",
+    popupClass: "popup",
+    popupOpened: "popup_opened"
   }
 
   constructor(popupSelector) {
-    this._modal = document.querySelector(popupSelector);
+    this._popup = document.querySelector(popupSelector);
   }
 
-  openModal () {
-    this._modal.classList.add(Popup.selectors.popupOpened);
+  openPopup () {
+    this._popup.classList.add(Popup.selectors.popupOpened);
     document.addEventListener('keydown', (evt) => this._handleEscClose(evt));
-    this._modal.addEventListener('click', (evt) => this._handleOverlayClose(evt));
+    this._popup.addEventListener('click', (evt) => this._handleOverlayClose(evt));
   }
 
-  closeModal () {
-    this._modal.classList.remove(Popup.selectors.popupOpened);
+  closePopup () {
+    this._popup.classList.remove(Popup.selectors.popupOpened);
     document.removeEventListener('keydown', this._handleEscClose);
-    this._modal.removeEventListener('click', this._handleOverlayClose);
+    this._popup.removeEventListener('click', this._handleOverlayClose);
   }
 
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
-      this.closeModal();
+      this.closePopup();
     }
   }
 
   _handleOverlayClose(evt) {
     if (evt.target.classList.contains(Popup.selectors.popupClass)) {
-      this.closeModal();
+      this.closePopup();
     }
   }
 
   setEventListeners() {
-    this._modal.querySelector(Popup.selectors.popupCloseButton).addEventListener('click', () => this.closeModal());
+    this._popup.querySelector(Popup.selectors.popupCloseButton).addEventListener('click', () => this.closePopup());
   }
 }

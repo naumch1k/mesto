@@ -21,7 +21,7 @@
 ## Languages
 * HTML5
 * CSS3
-* JavaScript
+* JavaScript, Object-Oriented Programming
 
 ## To Do
 * Likes counter

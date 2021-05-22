@@ -5,7 +5,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
-import {initialCards} from '../utils/initial-сards.js';
+import Api from '../components/Api.js';
 
 import {
   userData,
@@ -16,10 +16,18 @@ import {
   profileSelector,
   openEditPopupButtonSelector,
   openAddPopupButtonSelector,
-  formSubmitButtonSelector,
+  //formSubmitButtonSelector,
   editFormInputNameSelector,
   editFormInputBioSelector
 } from '../utils/constants.js';
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-24',
+  headers: {
+    authorization: '2a6d7634-25aa-4e7e-bcf3-8309525480f9',
+    'Content-Type': 'application/json'
+  }
+})
 
 // variables
 
@@ -30,7 +38,7 @@ const editForm = document.querySelector(formSelectors.editFormSelector);
 const editFormInputName = editForm.querySelector(editFormInputNameSelector);
 const editFormInputBio = editForm.querySelector(editFormInputBioSelector);
 const addForm = document.querySelector(formSelectors.addFormSelector);
-const addFormSubmitButton = addForm.querySelector(formSubmitButtonSelector);
+//const addFormSubmitButton = addForm.querySelector(formSubmitButtonSelector);
 
 // edit profile
 
@@ -55,7 +63,7 @@ const createCard = (data, cardSelector) => {
 }
 
 const cardList = new Section ({
-  items: initialCards,
+  //items: initialCards,
   renderer: (item) => {
     const cardElement = createCard(item, Card.selectors.template);
     cardList.addItem(cardElement);
@@ -102,6 +110,9 @@ openAddPopupBtn.addEventListener ("click", function () {
   addFormValidator.setInitialState();
 });
 
-// load initial cards
+// load cards from the server
 
-cardList.renderItems();
+api.getCards()
+  .then(res => {
+    cardList.renderItems(res);
+  })

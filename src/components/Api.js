@@ -11,11 +11,15 @@ export default class Api {
         authorization: this._token
       }
     })
-      .then(res =>  {
-        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      })
-      .catch(err => {
-        console.log(err);
-      })
+      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+  }
+
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: {
+        authorization: this._token
+      }
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
   }
 }

@@ -9,7 +9,8 @@ export const formValidationSettings = {
 
 export const userData = {
   userNameSelector: '.profile__name',
-  userBioSelector: '.profile__bio'
+  userBioSelector: '.profile__bio',
+  userAvatarSelector: '.profile__avatar'
 }
 
 export const popupSelectors = {

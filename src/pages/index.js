@@ -42,6 +42,7 @@ const addForm = document.querySelector(formSelectors.addFormSelector);
 
 // edit profile
 
+
 const editFormValidator = new FormValidator(formValidationSettings, editForm);
 const userInfo = new UserInfo(userData);
 
@@ -100,7 +101,7 @@ imagePopup.setEventListeners();
 openEditPopupBtn.addEventListener ('click', function () {
   const userData = userInfo.getUserInfo();
   editFormInputName.value = userData.name;
-  editFormInputBio.value = userData.bio;
+  editFormInputBio.value = userData.about;
   editPopup.openPopup();
   editFormValidator.setInitialState();
 });
@@ -110,9 +111,13 @@ openAddPopupBtn.addEventListener ("click", function () {
   addFormValidator.setInitialState();
 });
 
-// load cards from the server
+Promise.all([api.getUserInfo(), api.getCards()])
+  .then(([userData, cards]) => {
 
-api.getCards()
-  .then(res => {
-    cardList.renderItems(res);
+    // load cards from the server
+    cardList.renderItems(cards);
+
+    // get user data from the server
+    userInfo.setUserInfo(userData);
+    userInfo.setUserAvatar(userData.avatar);
   })

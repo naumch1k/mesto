@@ -14,7 +14,8 @@ export default class Card {
     likeButtonActive: "element__like-btn_active"
   }
 
-  constructor(data, cardSelector, handleCardClick) {
+  constructor(data, cardSelector, { handleCardClick, handleDeleteButtonClick }) {
+    this._data = data;
     this._name = data.name;
     this._link = data.link;
     this._alt = data.alt;
@@ -22,6 +23,7 @@ export default class Card {
 
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteButtonClick = handleDeleteButtonClick;
   }
 
   _getTemplate() {
@@ -42,22 +44,16 @@ export default class Card {
     this._element.querySelector(Card.selectors.likeCount).textContent = this._likeCounter.length;
   }
 
-  _handleCardClick(name, link) {
-    imagePopup.openPopup(name, link, alt);
-  }
-
   _setEventListeners() {
-    this._element.querySelector(Card.selectors.deleteButton).addEventListener('click', () => this._element.remove());
+    this._element.querySelector(Card.selectors.deleteButton).addEventListener('click', () => this._handleDeleteButtonClick());
     this._element.querySelector(Card.selectors.likeButton).addEventListener('click', () => this._handleLike());
-    this._element.querySelector(Card.selectors.elementImage).addEventListener('click', () => this._handleCardClick(this._name, this._link, this._alt));
+    this._element.querySelector(Card.selectors.elementImage).addEventListener('click', () => this._handleCardClick(this._data));
   }
 
   generateCard() {
     this._element = this._getTemplate();
     this._image = this._element.querySelector(Card.selectors.elementImage);
-    console.log(this._element);
     this._setLikeCount();
-
 
     this._setEventListeners();
   

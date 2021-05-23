@@ -1,5 +1,6 @@
 import './index.css';
 import Card from '../components/Card.js';
+import Popup from '../components/Popup';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import FormValidator from '../components/FormValidator.js';
@@ -42,7 +43,6 @@ const addForm = document.querySelector(formSelectors.addFormSelector);
 
 // edit profile
 
-
 const editFormValidator = new FormValidator(formValidationSettings, editForm);
 const userInfo = new UserInfo(userData);
 
@@ -55,15 +55,19 @@ const editFormSubmitHandler = ((data) => {
   editPopup.closePopup();
 });
 
-const editPopup = new PopupWithForm(popupSelectors.editPopupSelector, editFormSubmitHandler);
-
 // add card
 
 const addFormValidator = new FormValidator(formValidationSettings, addForm);
 
 const createCard = (data, cardSelector) => {
-  const element = new Card(data, cardSelector, cardImageClickHandler);
-  //element.setLikeCount();
+  const element = new Card(data, cardSelector, {
+    handleCardClick: (name, link, alt = `Изображение ${name}`) => {
+      imagePopup.openPopup(name, link, alt);
+    },
+    handleDeleteButtonClick: () => {
+      confirmPopup.openPopup();
+    }
+  });
   const cardElement = element.generateCard();
   return cardElement;
 }
@@ -85,15 +89,10 @@ const addFormSubmitHandler = ((data) => {
   addPopup.closePopup();
 });
 
+const editPopup = new PopupWithForm(popupSelectors.editPopupSelector, editFormSubmitHandler);
 const addPopup = new PopupWithForm(popupSelectors.addPopupSelector, addFormSubmitHandler);
-
-// view card image
-
-function cardImageClickHandler(name, link, alt = `Изображение ${name}`) {
-  imagePopup.openPopup(name, link, alt);
-}
-
 const imagePopup = new PopupWithImage(popupSelectors.imagePopupSelector);
+const confirmPopup = new Popup(popupSelectors.confirmPopupSelector);
 
 // enable form validation
 
@@ -123,7 +122,6 @@ Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {
 
     // load cards from the server
-    console.log(cards);
     cardList.renderItems(cards);
 
     // get user data from the server

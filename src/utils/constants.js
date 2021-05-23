@@ -16,7 +16,8 @@ export const userData = {
 export const popupSelectors = {
   editPopupSelector: ".popup_type_edit",
   addPopupSelector: ".popup_type_add",
-  imagePopupSelector: ".popup_type_image"
+  imagePopupSelector: ".popup_type_image",
+  confirmPopupSelector: ".popup_type_confirm"
 }
 
 export const formSelectors = {

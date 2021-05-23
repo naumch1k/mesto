@@ -14,6 +14,23 @@ export default class Api {
       .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
   }
 
+  addNewCard(data) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link
+      })
+    })
+      .then(res =>  {
+        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      })
+  }
+
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {

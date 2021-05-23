@@ -70,14 +70,17 @@ const createCard = (data, cardSelector) => {
 const cardList = new Section ({
   //items: initialCards,
   renderer: (item) => {
-    const cardElement = createCard(item, Card.selectors.template);
-    cardList.addItem(cardElement);
+    cardList.addItem(createCard(item, Card.selectors.template));
   }
 }, elementsListSelector)
 
 const addFormSubmitHandler = ((data) => {
-  const cardElement = createCard(data, '#element-template');
-  cardList.addItem(cardElement);
+  api.addNewCard(data)
+    .then(res => {
+      const cardElement = createCard(res, '#element-template');
+      cardList.addItem(cardElement);
+    })
+    .catch(err => console.log(`Error: ${err}`))
   addPopup.closePopup();
 });
 

@@ -5,12 +5,12 @@ export default class Card {
 
   static selectors = {
     template: "#element-template",
-    //elements: ".elements__list",
     element: ".element",
     elementImage: ".element__image",
     elementTitle: ".element__title",
     deleteButton: ".element__delete-btn",
     likeButton: ".element__like-btn",
+    likeCount: ".element__like-count",
     likeButtonActive: "element__like-btn_active"
   }
 
@@ -18,6 +18,7 @@ export default class Card {
     this._name = data.name;
     this._link = data.link;
     this._alt = data.alt;
+    this._likeCounter = data.likes;
 
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
@@ -37,6 +38,10 @@ export default class Card {
     this._element.querySelector(Card.selectors.likeButton).classList.toggle(Card.selectors.likeButtonActive);
   }
 
+  _setLikeCount() {
+    this._element.querySelector(Card.selectors.likeCount).textContent = this._likeCounter.length;
+  }
+
   _handleCardClick(name, link) {
     imagePopup.openPopup(name, link, alt);
   }
@@ -50,6 +55,9 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._image = this._element.querySelector(Card.selectors.elementImage);
+    console.log(this._element);
+    this._setLikeCount();
+
 
     this._setEventListeners();
   

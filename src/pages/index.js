@@ -63,6 +63,7 @@ const addFormValidator = new FormValidator(formValidationSettings, addForm);
 
 const createCard = (data, cardSelector) => {
   const element = new Card(data, cardSelector, cardImageClickHandler);
+  //element.setLikeCount();
   const cardElement = element.generateCard();
   return cardElement;
 }
@@ -122,6 +123,7 @@ Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {
 
     // load cards from the server
+    console.log(cards);
     cardList.renderItems(cards);
 
     // get user data from the server

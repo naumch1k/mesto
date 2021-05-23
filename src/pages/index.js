@@ -1,6 +1,6 @@
 import './index.css';
 import Card from '../components/Card.js';
-import Popup from '../components/Popup';
+import PopupConfirmDeletion from '../components/PopupConfirmDeletion.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import FormValidator from '../components/FormValidator.js';
@@ -17,7 +17,6 @@ import {
   profileSelector,
   openEditPopupButtonSelector,
   openAddPopupButtonSelector,
-  //formSubmitButtonSelector,
   editFormInputNameSelector,
   editFormInputBioSelector
 } from '../utils/constants.js';
@@ -30,6 +29,8 @@ const api = new Api({
   }
 })
 
+let user = null;
+
 // variables
 
 const profile = document.querySelector(profileSelector);
@@ -39,7 +40,7 @@ const editForm = document.querySelector(formSelectors.editFormSelector);
 const editFormInputName = editForm.querySelector(editFormInputNameSelector);
 const editFormInputBio = editForm.querySelector(editFormInputBioSelector);
 const addForm = document.querySelector(formSelectors.addFormSelector);
-//const addFormSubmitButton = addForm.querySelector(formSubmitButtonSelector);
+const confirmForm = document.querySelector(formSelectors.confirmFormSelector);
 
 // edit profile
 
@@ -61,11 +62,20 @@ const addFormValidator = new FormValidator(formValidationSettings, addForm);
 
 const createCard = (data, cardSelector) => {
   const element = new Card(data, cardSelector, {
+    currentUser: user._id,
     handleCardClick: (name, link, alt = `Изображение ${name}`) => {
       imagePopup.openPopup(name, link, alt);
     },
     handleDeleteButtonClick: () => {
       confirmPopup.openPopup();
+      confirmPopup.setSubmitHandler(() => {
+        api.deleteCard(element.getId())
+          .catch(err => console.log(`Error: ${err}`))
+          .finally(() => {
+            element.removeCard();
+            confirmPopup.closePopup();
+          })
+      })
     }
   });
   const cardElement = element.generateCard();
@@ -92,7 +102,7 @@ const addFormSubmitHandler = ((data) => {
 const editPopup = new PopupWithForm(popupSelectors.editPopupSelector, editFormSubmitHandler);
 const addPopup = new PopupWithForm(popupSelectors.addPopupSelector, addFormSubmitHandler);
 const imagePopup = new PopupWithImage(popupSelectors.imagePopupSelector);
-const confirmPopup = new Popup(popupSelectors.confirmPopupSelector);
+const confirmPopup = new PopupConfirmDeletion(popupSelectors.confirmPopupSelector);
 
 // enable form validation
 
@@ -104,6 +114,7 @@ addFormValidator.enableValidation();
 editPopup.setEventListeners();
 addPopup.setEventListeners();
 imagePopup.setEventListeners();
+confirmPopup.setEventListeners();
 
 openEditPopupBtn.addEventListener ('click', function () {
   const userData = userInfo.getUserInfo();
@@ -121,10 +132,13 @@ openAddPopupBtn.addEventListener ("click", function () {
 Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {
 
-    // load cards from the server
-    cardList.renderItems(cards);
 
     // get user data from the server
+    user = userData;
     userInfo.setUserInfo(userData);
     userInfo.setUserAvatar(userData.avatar);
+
+    // load cards from the server
+    cardList.renderItems(cards);
   })
+  

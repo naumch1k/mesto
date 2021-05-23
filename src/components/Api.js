@@ -1,8 +1,7 @@
 export default class Api {
-  constructor(options) { //baseUrl, token, groupId
+  constructor(options) {
     this._baseUrl = options.baseUrl;
     this._token = options.headers.authorization;
-    //this._group.Id = options.groupId;
   }
 
   getCards() {
@@ -26,9 +25,18 @@ export default class Api {
         link: data.link
       })
     })
-      .then(res =>  {
-        return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      })
+      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
   }
 
   getUserInfo() {
@@ -37,7 +45,7 @@ export default class Api {
         authorization: this._token
       }
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
   }
 
   setUserInfo(data) {
@@ -52,6 +60,6 @@ export default class Api {
         about: data.about
       })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
   }
 }

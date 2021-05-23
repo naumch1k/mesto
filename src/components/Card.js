@@ -9,17 +9,21 @@ export default class Card {
     elementImage: ".element__image",
     elementTitle: ".element__title",
     deleteButton: ".element__delete-btn",
+    deleteButtonHiddenClass: "element__delete-btn_hidden",
     likeButton: ".element__like-btn",
     likeCount: ".element__like-count",
     likeButtonActive: "element__like-btn_active"
   }
 
-  constructor(data, cardSelector, { handleCardClick, handleDeleteButtonClick }) {
+  constructor(data, cardSelector, {currentUser, handleCardClick, handleDeleteButtonClick }) {
     this._data = data;
     this._name = data.name;
     this._link = data.link;
     this._alt = data.alt;
+    this._id = data._id;
     this._likeCounter = data.likes;
+    this._owner = data.owner._id;
+    this._currentUser = currentUser;
 
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
@@ -50,6 +54,10 @@ export default class Card {
     this._element.querySelector(Card.selectors.elementImage).addEventListener('click', () => this._handleCardClick(this._data));
   }
 
+  getId() {
+    return this._id;
+  }
+
   generateCard() {
     this._element = this._getTemplate();
     this._image = this._element.querySelector(Card.selectors.elementImage);
@@ -60,7 +68,16 @@ export default class Card {
     this._image.src = this._link;
     this._element.querySelector(Card.selectors.elementTitle).textContent = this._name;
     this._image.alt = this._alt;
+
+    if (this._owner === this._currentUser) {
+      this._element.querySelector(Card.selectors.deleteButton).classList.remove(Card.selectors.deleteButtonHiddenClass)
+    }
   
     return this._element;
+  }
+
+  removeCard() {
+    this._element.remove();
+    this._element = null;
   }
 }

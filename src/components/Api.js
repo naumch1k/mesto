@@ -22,4 +22,19 @@ export default class Api {
     })
     .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
   }
+
+  setUserInfo(data) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about
+      })
+    })
+    .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+  }
 }

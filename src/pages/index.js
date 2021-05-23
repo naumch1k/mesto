@@ -47,7 +47,11 @@ const editFormValidator = new FormValidator(formValidationSettings, editForm);
 const userInfo = new UserInfo(userData);
 
 const editFormSubmitHandler = ((data) => {
-  userInfo.setUserInfo(data);
+  api.setUserInfo(data)
+    .then((res) => {
+      userInfo.setUserInfo(res);
+    })
+    .catch(err => console.log(`Error: ${err}`))
   editPopup.closePopup();
 });
 

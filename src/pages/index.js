@@ -30,7 +30,7 @@ const api = new Api({
 
 let user = null;
 
-// variables
+// elements
 
 const profile = document.querySelector(profileSelector);
 const openEditPopupBtn = profile.querySelector(openPopupButtonSelectors.openEditPopupButtonSelector);
@@ -102,7 +102,6 @@ const createCard = (data, cardSelector) => {
 }
 
 const cardList = new Section ({
-  //items: initialCards,
   renderer: (item) => {
     cardList.addItem(createCard(item, Card.selectors.template));
   }
@@ -134,6 +133,8 @@ const editAvatarFormSubmitHandler = ((data) => {
     })
     .catch(err => console.log(`Error: ${err}`))
 })
+
+// create popup instance
 
 const editPopup = new PopupWithForm(popupSelectors.editPopupSelector, editFormSubmitHandler);
 const addPopup = new PopupWithForm(popupSelectors.addPopupSelector, addFormSubmitHandler);
@@ -172,6 +173,8 @@ openEditAvatarPopupBtn.addEventListener ("click", function () {
   editAvatarPopup.openPopup();
   editAvatarFormValidator.setInitialState();
 });
+
+// render page
 
 Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {

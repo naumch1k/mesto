@@ -1,6 +1,3 @@
-import {popupSelectors} from '../utils/constants.js';
-const imagePopup = document.querySelector(popupSelectors.imagePopupSelector);
-
 export default class Card {
 
   static selectors = {
@@ -89,9 +86,9 @@ export default class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._image = this._element.querySelector(Card.selectors.elementImage);
+
     this._setLikeCount();
     this._ifLikedByCurrentUser();
-
     this._setEventListeners();
   
     this._image.src = this._link;

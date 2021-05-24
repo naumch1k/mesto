@@ -49,12 +49,16 @@ const editAvatarFormValidator = new FormValidator(formValidationSettings, editAv
 const userInfo = new UserInfo(userData);
 
 const editFormSubmitHandler = ((data) => {
+  editPopup.renderLoading(true);
   api.setUserInfo(data)
     .then((res) => {
       userInfo.setUserInfo(res);
     })
     .catch(err => console.log(`Error: ${err}`))
-  editPopup.closePopup();
+    .finally(() => {
+      editPopup.closePopup();
+      editPopup.renderLoading(false);
+    })
 });
 
 // add card
@@ -91,16 +95,21 @@ const cardList = new Section ({
 }, elementsListSelector)
 
 const addFormSubmitHandler = ((data) => {
+  addPopup.renderLoading(true);
   api.addNewCard(data)
     .then(res => {
       const cardElement = createCard(res, '#element-template');
       cardList.addItem(cardElement);
     })
     .catch(err => console.log(`Error: ${err}`))
-  addPopup.closePopup();
+    .finally(() => {
+      addPopup.closePopup();
+      addPopup.renderLoading(false);
+    })
 });
 
 const editAvatarFormSubmitHandler = ((data) => {
+  editAvatarPopup.renderLoading(true);
   api.setUserAvatar(data)
     .then((res) => {
       userInfo.setUserAvatar(res);
@@ -108,6 +117,7 @@ const editAvatarFormSubmitHandler = ((data) => {
     .catch(err => console.log(`Error: ${err}`))
     .finally(() => {
       editAvatarPopup.closePopup();
+      editAvatarPopup.renderLoading(false);
     })
 
 })

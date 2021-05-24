@@ -4,7 +4,8 @@ export default class PopupWithForm extends Popup {
 
   static selectors = {
     form: ".form",
-    formItem: ".form__item"
+    formItem: ".form__item",
+    formSubmitButton: ".form__submit-btn"
   }
 
   constructor(popupSelector, submitHandler) {
@@ -12,6 +13,16 @@ export default class PopupWithForm extends Popup {
     this._submitHandler = submitHandler;
 
     this._form = this._popup.querySelector(PopupWithForm.selectors.form);
+    this._submitButton = this._form.querySelector(PopupWithForm.selectors.formSubmitButton);
+    this._initialSubmitButtonValue = this._submitButton.textContent;
+  }
+
+  renderLoading(isLoading, buttonValue = 'Cохранение...') {
+    if (isLoading) {
+      this._submitButton.textContent = buttonValue;
+    } else {
+      this._submitButton.textContent = this._initialSubmitButtonValue;
+    }
   }
 
   _getInputValues() {

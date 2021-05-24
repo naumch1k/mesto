@@ -85,16 +85,16 @@ export default class Api {
     .then(this._handleResponse)
   }
 
-  // deleteLike(data) {
-  //   return fetch(`${this._baseUrl}/cards/likes/${data._id}`, {
-  //     method: 'DELETE',
-  //     headers: {
-  //       authorization: this._token,
-  //       'Content-Type': 'application/json'
-  //     }
-  //   })
-  //   .then(this._handleResponse)
-  // }
+  deleteLike(data) {
+    return fetch(`${this._baseUrl}/cards/likes/${data._id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(this._handleResponse)
+  }
 
   setLike(data) {
     return fetch(`${this._baseUrl}/cards/likes/${data._id}`, {

@@ -88,6 +88,13 @@ const createCard = (data, cardSelector) => {
         element.like(data)
       })
       .catch(err => console.log(`Error: ${err}`))
+    },
+    deleteLike: () => {
+      api.deleteLike(element._data)
+      .then(data => {
+        element.deleteLike(data)
+      })
+      .catch(err => console.log(`Error: ${err}`))
     }
   });
   const cardElement = element.generateCard();
@@ -175,6 +182,5 @@ Promise.all([api.getUserInfo(), api.getCards()])
     userInfo.setUserAvatar(userData);
 
     // load cards from the server
-    console.log(cards)
     cardList.renderItems(cards);
   })

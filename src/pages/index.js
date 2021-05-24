@@ -182,5 +182,5 @@ Promise.all([api.getUserInfo(), api.getCards()])
     userInfo.setUserAvatar(userData);
 
     // load cards from the server
-    cardList.renderItems(cards);
+    cardList.renderItems(cards.reverse());
   })

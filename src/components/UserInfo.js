@@ -17,8 +17,8 @@ export default class UserInfo {
     this._about.textContent = about;
   }
 
-  setUserAvatar(avatar) {
-    this._avatar.src = avatar;
+  setUserAvatar(data) {
+    this._avatar.src = data.avatar;
   }
 
   getUserId() {

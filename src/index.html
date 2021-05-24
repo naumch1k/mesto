@@ -14,7 +14,10 @@
     </header>
     <main class="content page__content">
       <section class="profile content__section">
-        <img class="profile__avatar" src="" alt="Логотип профиля">
+        <div class="profile__avatar-container">
+          <img class="profile__avatar" src="" alt="Логотип профиля">
+          <button class="profile__avatar-btn" aria-label="Обновить аватар"></button>
+        </div>
         <div class="profile__info">
           <h1 class="profile__name"></h1>
           <p class="profile__bio"></p>
@@ -77,6 +80,19 @@
           <button class="form__submit-btn" type="submit">Да</button>
         </form>
       </div>
+    </div>
+  </div>
+  <div class="popup popup-type-avatar">
+    <div class="popup__container popup__container_type_form">
+      <button class="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
+      <form class="form avatar-form" name="avatar" novalidate>
+        <h2 class="form__heading">Обновить аватар</h2>
+        <fieldset class="form__items">
+          <input class="form__item" id="avatar-url" type="url" name="avatar" placeholder="Ссылка на картинку" required>
+          <p class='form__error' id='avatar-url-error'></p>
+        </fieldset>
+        <button class="form__submit-btn" type="submit">Сохранить</button>
+      </form>
     </div>
   </div>
   <template id="element-template">

@@ -17,18 +17,24 @@ export const popupSelectors = {
   editPopupSelector: ".popup_type_edit",
   addPopupSelector: ".popup_type_add",
   imagePopupSelector: ".popup_type_image",
-  confirmPopupSelector: ".popup_type_confirm"
+  confirmPopupSelector: ".popup_type_confirm",
+  editAvatarPopupSelector: ".popup-type-avatar"
 }
 
 export const formSelectors = {
-  editFormSelector: ".edit-form",
+  editProfileFormSelector: ".edit-form",
   addFormSelector: ".add-form",
-  confirmFormSelector: ".confirm-form"
+  editAvatarFormSelector: ".avatar-form"
 }
+
+export const openPopupButtonSelectors = {
+  openEditPopupButtonSelector: ".profile__edit-btn",
+  openAddPopupButtonSelector: ".profile__add-btn",
+  openEditAvatarButtonSelector: ".profile__avatar-btn"
+}
+
 
 export const elementsListSelector = '.elements__list';
 export const profileSelector = ".profile";
-export const openEditPopupButtonSelector = ".profile__edit-btn";
-export const openAddPopupButtonSelector = ".profile__add-btn";
 export const editFormInputNameSelector = ".form__item_el_name";
 export const editFormInputBioSelector = ".form__item_el_bio";

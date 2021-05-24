@@ -12,11 +12,10 @@ import {
   userData,
   formValidationSettings,
   popupSelectors,
+  openPopupButtonSelectors,
   formSelectors,
   elementsListSelector,
   profileSelector,
-  openEditPopupButtonSelector,
-  openAddPopupButtonSelector,
   editFormInputNameSelector,
   editFormInputBioSelector
 } from '../utils/constants.js';
@@ -34,17 +33,19 @@ let user = null;
 // variables
 
 const profile = document.querySelector(profileSelector);
-const openEditPopupBtn = profile.querySelector(openEditPopupButtonSelector);
-const openAddPopupBtn = profile.querySelector(openAddPopupButtonSelector);
-const editForm = document.querySelector(formSelectors.editFormSelector);
+const openEditPopupBtn = profile.querySelector(openPopupButtonSelectors.openEditPopupButtonSelector);
+const openAddPopupBtn = profile.querySelector(openPopupButtonSelectors.openAddPopupButtonSelector);
+const openEditAvatarPopupBtn = profile.querySelector(openPopupButtonSelectors.openEditAvatarButtonSelector);
+const editForm = document.querySelector(formSelectors.editProfileFormSelector);
 const editFormInputName = editForm.querySelector(editFormInputNameSelector);
 const editFormInputBio = editForm.querySelector(editFormInputBioSelector);
 const addForm = document.querySelector(formSelectors.addFormSelector);
-const confirmForm = document.querySelector(formSelectors.confirmFormSelector);
+const editAvatarForm = document.querySelector(formSelectors.editAvatarFormSelector);
 
 // edit profile
 
 const editFormValidator = new FormValidator(formValidationSettings, editForm);
+const editAvatarFormValidator = new FormValidator(formValidationSettings, editAvatarForm);
 const userInfo = new UserInfo(userData);
 
 const editFormSubmitHandler = ((data) => {
@@ -99,15 +100,29 @@ const addFormSubmitHandler = ((data) => {
   addPopup.closePopup();
 });
 
+const editAvatarFormSubmitHandler = ((data) => {
+  api.setUserAvatar(data)
+    .then((res) => {
+      userInfo.setUserAvatar(res);
+    })
+    .catch(err => console.log(`Error: ${err}`))
+    .finally(() => {
+      editAvatarPopup.closePopup();
+    })
+
+})
+
 const editPopup = new PopupWithForm(popupSelectors.editPopupSelector, editFormSubmitHandler);
 const addPopup = new PopupWithForm(popupSelectors.addPopupSelector, addFormSubmitHandler);
 const imagePopup = new PopupWithImage(popupSelectors.imagePopupSelector);
 const confirmPopup = new PopupConfirmDeletion(popupSelectors.confirmPopupSelector);
+const editAvatarPopup = new PopupWithForm(popupSelectors.editAvatarPopupSelector, editAvatarFormSubmitHandler);
 
 // enable form validation
 
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
+editAvatarFormValidator.enableValidation();
 
 // set event listeners
 
@@ -115,6 +130,7 @@ editPopup.setEventListeners();
 addPopup.setEventListeners();
 imagePopup.setEventListeners();
 confirmPopup.setEventListeners();
+editAvatarPopup.setEventListeners();
 
 openEditPopupBtn.addEventListener ('click', function () {
   const userData = userInfo.getUserInfo();
@@ -129,16 +145,19 @@ openAddPopupBtn.addEventListener ("click", function () {
   addFormValidator.setInitialState();
 });
 
+openEditAvatarPopupBtn.addEventListener ("click", function () {
+  editAvatarPopup.openPopup();
+  editAvatarFormValidator.setInitialState();
+});
+
 Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {
-
 
     // get user data from the server
     user = userData;
     userInfo.setUserInfo(userData);
-    userInfo.setUserAvatar(userData.avatar);
+    userInfo.setUserAvatar(userData);
 
     // load cards from the server
     cardList.renderItems(cards);
   })
-  

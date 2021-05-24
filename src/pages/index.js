@@ -81,6 +81,13 @@ const createCard = (data, cardSelector) => {
             confirmPopup.closePopup();
           })
       })
+    },
+    handleLike: () => {
+      api.setLike(element._data)
+      .then(data => {
+        element.like(data)
+      })
+      .catch(err => console.log(`Error: ${err}`))
     }
   });
   const cardElement = element.generateCard();
@@ -119,7 +126,6 @@ const editAvatarFormSubmitHandler = ((data) => {
       editAvatarPopup.closePopup();
       editAvatarPopup.renderLoading(false);
     })
-
 })
 
 const editPopup = new PopupWithForm(popupSelectors.editPopupSelector, editFormSubmitHandler);
@@ -169,5 +175,6 @@ Promise.all([api.getUserInfo(), api.getCards()])
     userInfo.setUserAvatar(userData);
 
     // load cards from the server
+    console.log(cards)
     cardList.renderItems(cards);
   })

@@ -54,11 +54,11 @@ const editFormSubmitHandler = ((data) => {
     .then((res) => {
       userInfo.setUserInfo(res);
     })
-    .catch(err => console.log(`Error: ${err}`))
-    .finally(() => {
+    .then(() => {
       editPopup.closePopup();
       editPopup.renderLoading(false);
     })
+    .catch(err => console.log(`Error: ${err}`))
 });
 
 // add card
@@ -75,11 +75,11 @@ const createCard = (data, cardSelector) => {
       confirmPopup.openPopup();
       confirmPopup.setSubmitHandler(() => {
         api.deleteCard(element.getId())
-          .catch(err => console.log(`Error: ${err}`))
-          .finally(() => {
+          .then(() => {
             element.removeCard();
             confirmPopup.closePopup();
           })
+          .catch(err => console.log(`Error: ${err}`))
       })
     },
     handleLike: () => {
@@ -115,11 +115,11 @@ const addFormSubmitHandler = ((data) => {
       const cardElement = createCard(res, '#element-template');
       cardList.addItem(cardElement);
     })
-    .catch(err => console.log(`Error: ${err}`))
-    .finally(() => {
+    .then(() => {
       addPopup.closePopup();
       addPopup.renderLoading(false);
     })
+    .catch(err => console.log(`Error: ${err}`))
 });
 
 const editAvatarFormSubmitHandler = ((data) => {
@@ -128,11 +128,11 @@ const editAvatarFormSubmitHandler = ((data) => {
     .then((res) => {
       userInfo.setUserAvatar(res);
     })
-    .catch(err => console.log(`Error: ${err}`))
-    .finally(() => {
+    .then(() => {
       editAvatarPopup.closePopup();
       editAvatarPopup.renderLoading(false);
     })
+    .catch(err => console.log(`Error: ${err}`))
 })
 
 const editPopup = new PopupWithForm(popupSelectors.editPopupSelector, editFormSubmitHandler);

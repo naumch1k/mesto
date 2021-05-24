@@ -1,7 +1,15 @@
 export default class Api {
+  
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._token = options.headers.authorization;
+  }
+
+  _handleResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Error: ${res.status}`);
   }
 
   getCards() {
@@ -10,7 +18,7 @@ export default class Api {
         authorization: this._token
       }
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+      .then(this._handleResponse)
   }
 
   addNewCard(data) {
@@ -25,7 +33,7 @@ export default class Api {
         link: data.link
       })
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+    .then(this._handleResponse)
   }
 
   deleteCard(cardId) {
@@ -36,7 +44,7 @@ export default class Api {
         'Content-Type': 'application/json'
       }
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+    .then(this._handleResponse)
   }
 
   getUserInfo() {
@@ -45,7 +53,7 @@ export default class Api {
         authorization: this._token
       }
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+    .then(this._handleResponse)
   }
 
   setUserInfo(data) {
@@ -60,7 +68,7 @@ export default class Api {
         about: data.about
       })
     })
-      .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+    .then(this._handleResponse)
   }
 
   setUserAvatar(data) {
@@ -74,6 +82,6 @@ export default class Api {
         avatar: data.avatar
       })
     })
-    .then(res => res.ok ? res.json() : Promise.reject(`Error: ${res.status}`))
+    .then(this._handleResponse)
   }
 }

@@ -33,8 +33,9 @@ export const openPopupButtonSelectors = {
   openEditAvatarButtonSelector: ".profile__avatar-btn"
 }
 
-
 export const elementsListSelector = '.elements__list';
 export const profileSelector = ".profile";
 export const editFormInputNameSelector = ".form__item_el_name";
 export const editFormInputBioSelector = ".form__item_el_bio";
+
+export const ESCAPE_KEY = "Escape";

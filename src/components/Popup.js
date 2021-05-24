@@ -1,3 +1,7 @@
+import {
+  ESCAPE_KEY
+} from '../utils/constants.js';
+
 export default class Popup {
 
   static selectors = {
@@ -23,7 +27,7 @@ export default class Popup {
   }
 
   _handleEscClose(evt) {
-    if (evt.key === "Escape") {
+    if (evt.key === ESCAPE_KEY) {
       this.closePopup();
     }
   }

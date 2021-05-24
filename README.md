@@ -8,10 +8,12 @@
 "Mesto" is a portfolio project created as a part of a study at [Yandex.Practicum](https://practicum.yandex.com/web/ "Web Development Program") - an interactive page where users can share their pictures.
 
 ### Functionality
+* Change user avatar
 * Edit user profile
 * Add and remove pics
-* "Like" for pics
 * Live form validation
+* "Like" for pics
+* Likes counter
 
 ## Technologies
 * Flexbox and Grid Layout
@@ -22,7 +24,3 @@
 * HTML5
 * CSS3
 * JavaScript, Object-Oriented Programming
-
-## To Do
-* Likes counter
-* Change user avatar pic

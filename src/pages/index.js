@@ -56,9 +56,11 @@ const editFormSubmitHandler = ((data) => {
     })
     .then(() => {
       editPopup.closePopup();
-      editPopup.renderLoading(false);
     })
     .catch(err => console.log(`Error: ${err}`))
+    .finally(() => {
+      editPopup.renderLoading(false);
+    })
 });
 
 // add card
@@ -116,9 +118,11 @@ const addFormSubmitHandler = ((data) => {
     })
     .then(() => {
       addPopup.closePopup();
-      addPopup.renderLoading(false);
     })
     .catch(err => console.log(`Error: ${err}`))
+    .finally(() => {
+      addPopup.renderLoading(false);
+    })
 });
 
 const editAvatarFormSubmitHandler = ((data) => {
@@ -129,9 +133,11 @@ const editAvatarFormSubmitHandler = ((data) => {
     })
     .then(() => {
       editAvatarPopup.closePopup();
-      editAvatarPopup.renderLoading(false);
     })
     .catch(err => console.log(`Error: ${err}`))
+    .finally(() => {
+      editAvatarPopup.renderLoading(false);
+    })
 })
 
 // create popup instance

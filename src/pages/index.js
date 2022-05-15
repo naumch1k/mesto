@@ -70,7 +70,7 @@ const addFormValidator = new FormValidator(formValidationSettings, addForm);
 const createCard = (data, cardSelector) => {
   const element = new Card(data, cardSelector, {
     currentUser: user._id,
-    handleCardClick: (name, link, alt = `Изображение ${name}`) => {
+    handleCardClick: (name, link, alt = `${name}`) => {
       imagePopup.openPopup(name, link, alt);
     },
     handleDeleteButtonClick: () => {

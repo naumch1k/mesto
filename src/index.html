@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -15,15 +15,15 @@
     <main class="content page__content">
       <section class="profile content__section">
         <div class="profile__avatar-container">
-          <img class="profile__avatar" src="#" alt="Логотип профиля">
-          <button class="profile__avatar-btn" aria-label="Обновить аватар"></button>
+          <img class="profile__avatar" src="#" alt="Profile avatar">
+          <button class="profile__avatar-btn" aria-label="Change Profile Picture"></button>
         </div>
         <div class="profile__info">
           <h1 class="profile__name"></h1>
           <p class="profile__bio"></p>
-          <button class="profile__edit-btn" type="button" aria-label="Редактировать профиль"></button>
+          <button class="profile__edit-btn" type="button" aria-label="Edit profile"></button>
         </div>
-        <button class="profile__add-btn" type="button" aria-label="Добавить фотографию"></button>
+        <button class="profile__add-btn" type="button" aria-label="Add image"></button>
       </section>
       <section class="elements content__section">
         <ul class="elements__list">
@@ -35,77 +35,77 @@
     </footer>
     <div class="popup popup_type_edit">
       <div class="popup__container popup__container_type_form">
-        <button class="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
+        <button class="popup__close-btn" type="button" aria-label="Close popup"></button>
         <form class="form edit-form" name="edit-form" novalidate>
-          <h2 class="form__heading">Редактировать профиль</h2>
+          <h2 class="form__heading">Edit profile</h2>
           <fieldset class="form__items">
-            <input class="form__item form__item_el_name" id="profile-name" type="text" name="name" placeholder="Имя" minlength="2" maxlength="40" required>
+            <input class="form__item form__item_el_name" id="profile-name" type="text" name="name" placeholder="Name" minlength="2" maxlength="40" required>
             <p class="form__error" id="profile-name-error"></p>
-            <input class="form__item form__item_el_bio" id="profile-bio" type="text" name="about" placeholder="О себе" minlength="2" maxlength="200" required>
+            <input class="form__item form__item_el_bio" id="profile-bio" type="text" name="about" placeholder="About me" minlength="2" maxlength="200" required>
             <p class="form__error" id="profile-bio-error"></p>
           </fieldset>
-          <button class="form__submit-btn" type="submit">Сохранить</button>
+          <button class="form__submit-btn" type="submit">Save</button>
         </form>
       </div>
     </div>
     <div class="popup popup_type_add">
       <div class="popup__container popup__container_type_form">
-        <button class="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
+        <button class="popup__close-btn" type="button" aria-label="Close popup"></button>
         <form class="form add-form" name="add-form" novalidate>
-          <h2 class="form__heading">Новое место</h2>
+          <h2 class="form__heading">New place</h2>
           <fieldset class="form__items">
-            <input class="form__item form__item_el_name" id="item-name" type="text" name="name" placeholder="Название" minlength="2" maxlength="30" required>
+            <input class="form__item form__item_el_name" id="item-name" type="text" name="name" placeholder="Title" minlength="2" maxlength="30" required>
             <p class="form__error" id="item-name-error"></p>
-            <input class="form__item form__item_el_link" id="item-url" type="url" name="link" placeholder="Ссылка на картинку" required>
+            <input class="form__item form__item_el_link" id="item-url" type="url" name="link" placeholder="Image link" required>
             <p class="form__error" id="item-url-error"></p>
           </fieldset>
-          <button class="form__submit-btn" type="submit">Создать</button>
+          <button class="form__submit-btn" type="submit">Create</button>
         </form>
       </div>
     </div>
     <div class="popup popup_type_image">
       <div class="popup__container popup__container_type_image">
-        <button class="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
+        <button class="popup__close-btn" type="button" aria-label="Close popup"></button>
         <figure class="popup__figure">
-          <img class="popup__image" src="#" alt="альт">
+          <img class="popup__image" src="#" alt="alt">
           <figcaption class="popup__image-caption"></figcaption>
         </figure>
       </div>
     </div>
     <div class="popup popup_type_confirm">
       <div class="popup__container popup__container_type_form">
-        <button class="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
+        <button class="popup__close-btn" type="button" aria-label="Close popup"></button>
         <form class="form confirm-form" name="confirm-form" novalidate>
-          <h2 class="form__heading form__heading_place_confirm">Вы уверены?</h2>
-          <button class="form__submit-btn" type="submit">Да</button>
+          <h2 class="form__heading form__heading_place_confirm">Are you sure</h2>
+          <button class="form__submit-btn" type="submit">Yes</button>
         </form>
       </div>
     </div>
   </div>
   <div class="popup popup-type-avatar">
     <div class="popup__container popup__container_type_form">
-      <button class="popup__close-btn" type="button" aria-label="Закрыть окно"></button>
+      <button class="popup__close-btn" type="button" aria-label="Close popup"></button>
       <form class="form avatar-form" name="avatar" novalidate>
-        <h2 class="form__heading">Обновить аватар</h2>
+        <h2 class="form__heading">Change Profile Picture</h2>
         <fieldset class="form__items">
-          <input class="form__item" id="avatar-url" type="url" name="avatar" placeholder="Ссылка на картинку" required>
+          <input class="form__item" id="avatar-url" type="url" name="avatar" placeholder="Image link" required>
           <p class='form__error' id='avatar-url-error'></p>
         </fieldset>
-        <button class="form__submit-btn" type="submit">Сохранить</button>
+        <button class="form__submit-btn" type="submit">Save</button>
       </form>
     </div>
   </div>
   <template id="element-template">
     <li class="element">
-      <img class="element__image" src="#" alt="альт">
+      <img class="element__image" src="#" alt="alt">
       <div class="element__desc">
         <h3 class="element__title"></h3>
         <div class="element__like-container">
-          <button class="element__like-btn" type="button" aria-label="Поставить лайк"></button>
+          <button class="element__like-btn" type="button" aria-label="Like image"></button>
           <span class="element__like-count">0</span>
         </div>
       </div>
-      <button class="element__delete-btn element__delete-btn_hidden" type="button" aria-label="Удалить фотографию"></button>
+      <button class="element__delete-btn element__delete-btn_hidden" type="button" aria-label="Delete image"></button>
     </li>
   </template>
 </body>

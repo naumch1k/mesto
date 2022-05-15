@@ -1,11 +1,11 @@
-# Portfolio project: "Mesto"
+# Portfolio project: "Around The U.S."
 
 *Read this in other languages:* [RU](https://github.com/naumch1k/mesto/blob/main/README.RU.md) 
 
 [GitHub Pages Link](https://naumch1k.github.io/mesto/index.html)
 
 ## Description
-"Mesto" is a portfolio project created as a part of a study at [Yandex.Practicum](https://practicum.yandex.com/web/ "Web Development Program") - an interactive page where users can share their pictures.
+"Around The U.S." is a portfolio project created as a part of a study at [Yandex.Practicum](https://practicum.yandex.com/web/ "Web Development Program") - an interactive page where users can share their pictures.
 
 ### Functionality
 * Change user avatar

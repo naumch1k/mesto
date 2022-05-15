@@ -1,4 +1,4 @@
-# Учебный проект: Mesto
+# Учебный проект: "Around The U.S."
 
 *Read this in other languages:* [EN](https://github.com/naumch1k/mesto/blob/main/README.md) 
 
